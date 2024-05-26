@@ -1,0 +1,30 @@
+.headerContainer {
+  height: 40vh;
+  background: linear-gradient(to right, #7b1a00, #9a2f0e 70%, #7b1a00);
+
+  .navBar {
+    display: flex;
+    padding: 2vh 4vh;
+    justify-content: space-between;
+    .navBarLeft {
+      .fiverrLogo {
+        width: 100px;
+        height: auto;
+        margin-right: auto;
+      }
+    }
+
+    .navBarRight {
+      display: flex;
+      justify-content: space-around;
+
+      > * {
+        margin: 0 0.4vw;
+        font-weight: bold;
+        font-size: 1.15vw;
+        text-transform: none;
+        color: white;
+      }
+    }
+  }
+}

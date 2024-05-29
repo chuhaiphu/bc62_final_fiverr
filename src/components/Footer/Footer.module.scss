@@ -1,0 +1,61 @@
+.footerContainer {
+    height: 100%;
+    // background-color: rgb(126, 65, 65);
+  
+    .navBar {
+      display: flex;
+      padding: 2vh 4vh;
+      justify-content: space-between;
+      .navBarLeft {
+        .fiverrLogo {
+          width: 100px;
+          height: auto;
+          margin-right: auto;
+        }
+      }
+      div {
+        margin-top: 10px;
+        color: rgb(102, 98, 98);
+      }
+      p {
+        margin: 0 0  5px 0;
+        font-size: 0.85rem;
+        color: rgb(141, 146, 151);
+      }
+    }
+    .horizontalLine {
+        border: 1px solid rgb(141, 146, 151);
+        margin-bottom: 20px;
+    }
+    .footer{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        color: rgb(141, 146, 151) ;
+        text-transform: capitalize;
+        .footerLeft{
+            display: flex;
+            .fiverrLogo{                    
+                width: 40px;
+            }
+        }
+        .footerRight{
+            display: flex;
+            .iconContact{
+                i{
+                    margin-right: 20px;
+                }
+            }
+            .iconText{
+                i{
+                    margin-right: 35px;
+                }
+            }
+        }
+       }
+       .endLine{
+        border: 3px solid rgb(36, 38, 41);
+        margin-bottom: 20px;
+       }
+    }
+  

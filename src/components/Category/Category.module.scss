@@ -1,0 +1,60 @@
+.cateContainer{
+    .item{
+        margin: 20px 0;
+        .icon{
+            position: relative;
+           
+            ::after{
+                content: '';
+                    position: absolute;
+                    left: 40%;
+                    bottom: -2px;
+                    background-color: #000;
+                    width: 20%;
+                    height: 2px;
+            }
+        }
+        .text{
+            margin-top: 10px;
+        }
+    }
+    
+    .categories{
+        margin: 50px 50px;
+    }
+    .slick-arrow{
+        display: block !important;
+    }
+    .itemCarousel{
+        display: flex !important;
+        justify-content: center;
+        margin: 0 3rem;
+        align-items: center;
+        text-align: start;
+        .itemRight{
+            line-height: 2rem;
+            height: auto;
+            margin: 0 3rem;
+            .author{
+                color: rgb(141, 146, 151) ;
+                .rooter{
+                    color: #000 !important;
+                    font-weight: 900;
+                }
+            }
+        }
+        .text{
+            font-size: 2.5em;
+            margin-right: 2rem;
+            font-family: "Edu TAS Beginner", cursive;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            line-height: 3rem;
+        }
+    }
+}
+.endLine{
+    border: 1px solid rgb(141, 146, 151);
+        margin-bottom: 20px;
+}

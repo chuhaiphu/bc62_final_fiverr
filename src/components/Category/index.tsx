@@ -177,7 +177,7 @@ export default function Category() {
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
-                                            <img src='./src/assets/data.png' alt="icon" />
+                                            <img height={5} src='./src/assets/data.png' alt="icon" />
                                         </Box>
                                         <Box className={styles.text}>
                                             Data

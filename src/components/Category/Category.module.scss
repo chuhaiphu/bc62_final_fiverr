@@ -1,0 +1,97 @@
+.cateContainer {
+    .item {
+        margin: 20px 0;
+        position: relative;
+
+        a {
+            color: #000;
+            text-align: center;
+
+            ::after {
+                border-bottom: 2px solid #c5c6c9;
+                content: "";
+                padding: 0 0 8px;
+                position: absolute;
+                right: 31%;
+                top: 55px;
+                width: 60px;
+                transition: width 0.3s ease;
+            }
+
+            .icon {
+                img {
+                    width: 3.5rem;
+                    height: 3.5rem;
+                }
+            }
+
+            .decorationIcon {
+                width: 100px;
+                height: 10px;
+                color: #000;
+            }
+
+            .text {
+                margin-top: 10px;
+            }
+        }
+
+        :hover {
+            text-decoration: none !important;
+
+            ::after {
+                border-bottom: 3px #1dbf73 solid ;
+                width: 90px;
+                left: calc(50% - 45px)
+            }
+        }
+    }
+
+    .categories {
+        margin: 50px 50px;
+        justify-content: center !important;
+    }
+
+    .slick-arrow {
+        display: block !important;
+    }
+
+    .itemCarousel {
+        display: flex !important;
+        justify-content: center;
+        margin: 0 3rem;
+        align-items: center;
+        text-align: start;
+
+        .itemRight {
+            line-height: 2rem;
+            height: auto;
+            margin: 0 3rem;
+
+            .author {
+                color: rgb(141, 146, 151);
+
+                .rooter {
+                    color: #000 !important;
+                    font-weight: 900;
+                }
+            }
+        }
+
+        .text {
+            font-size: 2.5em;
+            margin-right: 2rem;
+            font-family: "Edu TAS Beginner", cursive;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            line-height: 3rem;
+        }
+    }
+
+
+    .endLine {
+        border: 1px solid rgb(141, 146, 151);
+        margin-bottom: 20px;
+    }
+}

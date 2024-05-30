@@ -5,3 +5,17 @@
   font-size: 34px;
   font-weight: 900;
 }
+
+/* FOOTER  */
+
+/* css Link   */
+.css-1xylxj1-MuiTypography-root-MuiLink-root{
+  text-decoration: none !important;
+  display: block !important;
+} 
+.css-1xylxj1-MuiTypography-root-MuiLink-root:hover{
+  text-decoration: underline !important;
+  cursor: pointer;
+}
+
+ 

@@ -1,0 +1,260 @@
+.contentContainer {
+    background-color: #f5f5fc;
+
+    .content {
+        display: flex;
+        justify-content: space-between;
+
+        .contentLeft {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+
+            .infoAbove {
+                position: relative;
+                border: 1px solid #c7c7d1;
+                padding: 3%;
+                text-align: center;
+                margin-bottom: 3vh;
+                background-color: white;
+                .status {
+                    right: 0;
+                    position: absolute;
+                    top: 2vh;
+                    display: flex;
+                    border: 1px solid orange;
+                    border-radius: 4px;
+                    margin-right: 1vh;
+                    font-size: 13px;
+
+                    .text {
+                        margin: 3px;
+                        color: orange;
+                    }
+                }
+
+                .logo {
+                    padding: 2vh 0;
+                    margin: 0 12vh;
+                    margin-top: 2vh;
+                    background-color: #c7c7d1;
+                    border-radius: 50%;
+                    font-size: 8vh;
+                    color: white;
+
+                }
+
+                .name {
+                    margin-top: 30px;
+                }
+
+                .edit::after {
+                    content: "";
+                    width: 90%;
+                    position: absolute;
+                    top: 25vh;
+                    left: 5%;
+                    height: 2px;
+                    border-bottom: solid #c7c7d1 1px;
+                }
+
+                .from {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 14px;
+                    margin-top: 20px;
+
+                }
+
+                .memberSince {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 10px;
+                    font-size: 14px;
+
+                }
+            }
+
+            .infoBelow {
+                border: 1px solid #c7c7d1;
+                padding: 3%;
+                background-color: white;
+                .linked, .eng{
+                    font-size: 13px;
+                }
+                .basic{
+                    color: #c7c7d1 ;
+                }
+                .placehoder {
+                    font-size: 13px;
+                    margin-top: 0 !important;
+                }
+                .linked{
+                    .title {
+                        font-size: 18px;
+                        font-weight: bold;
+                        margin-top: 2vh;
+                        position: relative;
+                    }
+                    .title::before {
+                        content: "";
+                        position: absolute;
+                        width: 100%;
+                        top: -20px;
+                        left: 0;
+                        height: 2px;
+                        border-bottom: solid #c7c7d1 1px;
+                        
+                    }
+                }
+                .flex {
+                    display: flex;
+                    justify-content: space-between;
+                    position: relative;
+                    align-items: center;
+                    margin-top: 4vh;
+                    .title {
+                        font-size: 18px;
+                        font-weight: bold;
+                        margin-top: 0;
+                    }
+                    .title::before {
+                        content: "";
+                        position: absolute;
+                        width: 100%;
+                        top: -20px;
+                        left: 0;
+                        height: 2px;
+                        border-bottom: solid #c7c7d1 1px;
+                        
+                    }
+
+                    .addNow {
+                        font-size: 13px;
+                        
+                    }
+
+                }
+
+            }
+        }
+
+        .contentRight {
+            width: 70%;
+            margin-left: 10vh;
+            display: flex;
+            flex-direction: column;
+
+            .buyServices {
+                display: flex;
+                border: solid #c7c7d1 1px;
+                padding: 20px;
+                position: relative;
+                margin-bottom: 3vh;
+                background-color: white;
+
+                .icon {
+                    margin-right: 20px;
+                }
+
+                .text {
+
+                    .buy {
+                        .tellUs{
+                            display: flex;
+                            align-items: center;
+                        }
+                        .boldText {
+                            font-weight: bold;
+                        }
+
+                        .close {
+                            position: absolute;
+                            right: 0;
+                            top: 0
+                        }
+
+                        .tellUs {
+                            color: #1dbf73;
+                        }
+                    }
+                }
+            }
+
+            .createGigs {
+                border: solid #c7c7d1 1px;
+                padding: 20px;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 3vh;
+                align-items: center;
+                background-color: white;
+
+                .buttonGig {
+                    background-color: #1dbf73;
+                    font-weight: bold;
+                    padding: 10px;
+                    border-radius: 4px;
+                    border: none;
+                    color: white;
+                }
+            }
+
+            .hiredJob {
+                border: none;
+                padding: 5px;
+                margin-bottom: 1vh;
+                background-color: white;
+
+                .borderTop {
+                    border-top: 1px solid black;
+                    padding: 3px;
+                    display: flex;
+                    justify-content: space-between;
+                    background-color: #f5f5fc;
+                    .hiredRight {
+                        margin-left: 3vh;
+                       
+                        .title {
+                            font-size: 18px;
+                            font-weight: bold;
+                            margin-bottom: 10px;
+                        }
+
+                        .text {
+                            font-size: 13px;
+                        }
+
+                        .buttons {
+                            display: flex;
+                            justify-content: flex-end;
+
+                            .button {
+                                margin-left: 20px;
+                                border: 3px solid black;
+                                margin-top: 15px;
+                                padding: 6px;
+                                box-shadow: 3px 3px;
+                            }
+
+                            .buttonDetail {
+                                margin-left: 20px;
+                                border: 3px solid black;
+                                margin-top: 15px;
+                                padding: 6px 30px;
+                                box-shadow: 3px 3px;
+                            }
+                        }
+                    }
+
+                    .hiredLeft img {
+                        height: 150px;
+                        width: 200px;
+                    }
+                }
+
+            }
+        }
+
+    }
+}

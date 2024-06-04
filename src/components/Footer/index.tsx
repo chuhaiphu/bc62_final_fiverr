@@ -2,7 +2,7 @@
 
 import { Box, Container, Link } from '@mui/material';
 import styles from './Footer.module.scss';
-import FiverrLogo from "~/assets/Fiverr Logo.png";
+
 
 
 export default function Footer() {

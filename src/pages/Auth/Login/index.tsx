@@ -1,5 +1,42 @@
+import { useNavigate } from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form'
 import FiverLogo from '~/assets/Fiverr_Logo_Black.png'
+import { useLogin } from '~/hooks/user-hook'
+import { User } from '~/types/User.type';
+import Swal from 'sweetalert2';
+
+type FormFields = {
+  email: string;
+  password: string;
+};
+
 export default function Login() {
+  const navigate = useNavigate();
+  const { register, handleSubmit, formState: { errors } } = useForm<FormFields>()
+  const onSubmit: SubmitHandler<FormFields> = (data) => {
+    login(data)
+  }
+  const onSuccess = (user: User) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    navigate('/')
+  };
+  const onError = (error: any) => {
+    if (error && error.content == 'Email hoặc mật khẩu không đúng !') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Sign In Failed',
+        text: 'Invalid email or password. Please try again.',
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Sign In Failed',
+        text: 'An error occurred. Please try again later.',
+      });
+    }
+  };
+  const { mutate: login } = useLogin(onSuccess, onError);
+
   return (
     <>
       <div className="flex min-h-screen">
@@ -18,13 +55,14 @@ export default function Login() {
 
             <div className="mt-10">
               <div>
-                <form action="#" method="POST" className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                       Email address
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('email')}
                         id="email"
                         name="email"
                         type="email"
@@ -32,6 +70,7 @@ export default function Login() {
                         required
                         className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
+                      {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
                     </div>
                   </div>
 
@@ -41,6 +80,7 @@ export default function Login() {
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('password') }
                         id="password"
                         name="password"
                         type="password"
@@ -48,6 +88,8 @@ export default function Login() {
                         required
                         className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
+
+                      {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
                     </div>
                   </div>
 

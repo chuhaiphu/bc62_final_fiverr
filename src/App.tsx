@@ -1,12 +1,17 @@
-import Home from '~/pages/Home'
-import Login from './pages/Auth/Login'
-import Register from './pages/Auth/Register'
-import AdminPage from './pages/Admin'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { BrowserRouter as Router } from 'react-router-dom'
+import RouteElements from './routes'
+const queryClient = new QueryClient()
 function App() {
   return (
-    <>
-      <AdminPage />
-    </>
+
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <RouteElements />
+      </Router>
+      <ReactQueryDevtools initialIsOpen={false} position='bottom' />
+    </QueryClientProvider>
   )
 }
 

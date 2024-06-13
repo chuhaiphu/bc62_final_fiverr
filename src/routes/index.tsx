@@ -1,43 +1,44 @@
-import { Route } from "react-router-dom";
-import CourseClassidicationPage from "~/pages/Course-Classification";
+import { Navigate, Outlet, useRoutes } from 'react-router-dom';
+import Home from '~/pages/Home';
+import Login from '~/pages/Auth/Login';
+import Register from '~/pages/Auth/Register';
+import AdminPage from '~/pages/Admin';
 
-import Home from "~/pages/Home";
-import UserDetailPage from "~/pages/UserDetail";
-import { TypeRoute } from "~/types/user";
+const ProtectedRoute = () => {
+  return <Outlet />
+};
 
+const routes = [
+  {
+    path: '/',
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+        children: [
+          // Add any nested routes for the home page if needed
+        ],
+      },
+      {
+        path: '/admin',
+        element: <AdminPage />,
+      }
+    ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
+  }
+];
 
-const routes: TypeRoute[] = [
-    {
-        path: "",
-        element: Home,
-        
-    },
-    {
-        path: "user-detail",
-        element: UserDetailPage,
+const RouteElements = () => {
+  const element = useRoutes(routes);
+  return element;
+};
 
-    },
-    {
-        path: "course-classification",
-        element: CourseClassidicationPage,
-
-    }
-]
-
-const renderRoutes = () => {
-    return routes.map((route) => {
-        if (route.nested) { 
-            return(
-                <Route path={route.path} element={<route.element/>}>
-                    {
-                        route.nested.map((item)=>(<Route path={item.path} element={<item.element/>}/>))
-                    }
-                </Route>
-            )
-        } else {
-            return <Route key={route.path} path={route.path} element={<route.element />} />
-        }
-    })
-}
-
-export default renderRoutes;
+export default RouteElements;

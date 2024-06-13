@@ -1,5 +1,4 @@
 import { Navigate, Outlet, useRoutes } from 'react-router-dom';
-
 import Home from '~/pages/Home';
 import Login from '~/pages/Auth/Login';
 import Register from '~/pages/Auth/Register';

@@ -1,10 +1,11 @@
-// import { Box, Grid, styled } from "@mui/material";
+
 import styled from '@mui/system/styled';
 import Grid from '@mui/system/Unstable_Grid';
 import Box from '@mui/system/Box';
 import { Container, Link } from '@mui/material';
 import styles from './Category.module.scss';
 import { Carousel } from 'antd';
+import React from 'react';
 
 
 
@@ -18,7 +19,7 @@ const contentStyle: React.CSSProperties = {
     height: 'auto',
     lineHeight: '160px',
     textAlign: 'center',
-    background: '#364d79',
+    // background: '#364d79',
 };
 
 export default function Category() {

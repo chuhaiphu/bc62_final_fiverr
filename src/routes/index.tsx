@@ -1,6 +1,8 @@
 import { Route } from "react-router-dom";
-import UserDetail from "~/components/UserDetail";
+import CourseClassidicationPage from "~/pages/Course-Classification";
+
 import Home from "~/pages/Home";
+import UserDetailPage from "~/pages/UserDetail";
 import { TypeRoute } from "~/types/user";
 
 
@@ -12,7 +14,12 @@ const routes: TypeRoute[] = [
     },
     {
         path: "user-detail",
-        element: UserDetail,
+        element: UserDetailPage,
+
+    },
+    {
+        path: "course-classification",
+        element: CourseClassidicationPage,
 
     }
 ]

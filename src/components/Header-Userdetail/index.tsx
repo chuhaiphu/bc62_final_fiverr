@@ -2,7 +2,22 @@ import { Box, Button, Container, Input, Link } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './Header-Userdetail.module.scss';
 
+import { useListJob } from '~/hooks/listJob-hooke';
+
+
 export default function HeaderUserDetail() {
+
+    const { data, isLoading, error } = useListJob()
+
+    if (isLoading) {
+        return <div>Loading data...</div>
+    }
+
+    if (error) {
+        return <div>Error loading data: {error.message}</div>
+    };
+    console.log(data)
+    
     return (
         <>
             <Container>
@@ -39,7 +54,7 @@ export default function HeaderUserDetail() {
             <Box className={styles.line}></Box>
             <Container>
                 <Box className={styles.headerBelow}>
-                    <Link className={styles.item}> Graphics & Design</Link>
+                    {/* <Link className={styles.item}> Graphics & Design</Link>
                     <Link className={styles.item}> Digital Marketing</Link>
                     <Link className={styles.item}> Writing & Translation</Link>
                     <Link className={styles.item}> Video & Animation</Link>
@@ -50,7 +65,18 @@ export default function HeaderUserDetail() {
                         <label className={styles.new}>NEW</label>
                     </Link>
                     <Link className={styles.item}> Business</Link>
-                    <Link className={styles.item}> Lifestyle</Link>
+                    <Link className={styles.item}> Lifestyle</Link> */}
+                    {Array.isArray(data) ? (
+                        data.map((dataItem) => (
+                            <Link className={styles.item} key={dataItem.id}>
+                                {dataItem.tenLoaiCongViec}
+                            </Link>
+                        ))
+                    ) : (
+                        <Link className={styles.item}>
+                            ...
+                        </Link>
+                    )}
                 </Box>
             </Container>
             <Box className={styles.line}></Box>

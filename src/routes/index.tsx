@@ -3,6 +3,8 @@ import Home from '~/pages/Home';
 import Login from '~/pages/Auth/Login';
 import Register from '~/pages/Auth/Register';
 import AdminPage from '~/pages/Admin';
+import UserDetailPage from '~/pages/UserDetail';
+import CourseClassidicationPage from '~/pages/Course-Classification'
 
 const ProtectedRoute = () => {
   return <Outlet />
@@ -33,6 +35,16 @@ const routes = [
   {
     path: '/register',
     element: <Register />,
+  },
+  {
+    path: "user-detail",
+    element: <UserDetailPage/>,
+
+  },
+  {
+    path: "course-classification",
+    element: <CourseClassidicationPage/>,
+
   }
 ];
 

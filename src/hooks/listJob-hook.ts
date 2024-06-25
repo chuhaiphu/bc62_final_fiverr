@@ -1,6 +1,6 @@
-import { listjobApi } from '~/apis/list-job';
+import { listjobApi } from '~/apis/listJob-api';
 import { MenuLoaiCongViec } from '~/types/MenuLoaiCongViec.type';
-import { UseQueryOptions, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 
 export const useListJob = () => {

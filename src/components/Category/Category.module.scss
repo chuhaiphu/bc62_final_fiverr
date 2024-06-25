@@ -6,7 +6,7 @@
         a {
             color: #000;
             text-align: center;
-
+            
             ::after {
                 border-bottom: 2px solid #c5c6c9;
                 content: "";
@@ -22,6 +22,7 @@
                 img {
                     width: 3.5rem;
                     height: 3.5rem;
+                   display: inline;
                 }
             }
 
@@ -115,11 +116,59 @@
         button.slick-arrow.slick-next {
             padding: 5px;
             border-radius: 50%;
-            border: 1px solid rgb(141, 146, 151);
+            border: 1px solid rgb(255, 252, 252);
             border-radius: 50%;
-            background-color: rgb(141, 146, 151);
-            box-shadow: 2px 2px;
+            background-color:  rgb(250, 250, 250);
+            box-shadow: 2px 2px rgb(112, 106, 106);
+            // background-color: white;
         }
+        button.slick-arrow.slick-prev::after,button.slick-arrow.slick-next::after{
+            box-sizing: border-box;
+            position: absolute;
+            top: 13.3422913719943423px;
+            inset-inline-start: 2.3422913719943423px;
+            display: inline-block;
+            width: 11.315417256011315px;
+            height: 11.315417256011315px;
+            border: 0 solid currentcolor;
+            border-inline-width: 2px 0;
+            border-block-width: 2px 0;
+            border-radius: 1px;
+            content: "";
+        }
+        
+            .css-1xylxj1-MuiTypography-root-MuiLink-root{
+              text-decoration: none !important;
+              display: block !important;
+            } 
+            .css-1xylxj1-MuiTypography-root-MuiLink-root:hover{
+              text-decoration: underline !important;
+              cursor: pointer;
+            }
+            .slick-arrow {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: white;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                
+                z-index: 1;
+            } 
+            ._cateContainer_1sbm6_1 button.slick-arrow.slick-prev, ._cateContainer_1sbm6_1 button.slick-arrow.slick-next {
+                background-color: rgb(24, 25, 26);
+                box-shadow: 2px 2px;
+                padding: 5px;
+                border-width: 1px;
+                border-style: solid;
+                border-color: rgb(24, 25, 26);
+                border-image: initial;
+                border-radius: 50%;
+            }
+            .ant-carousel .slick-next, .ant-carousel .slick-prev{
+                color: #000000;
+                
+            }
+            
     }
 
 

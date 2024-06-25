@@ -2,7 +2,7 @@ import AdminAvatar from '~/assets/AdminAvatar.png'
 import FiverLogoShort from '~/assets/Fiverr-Logo-short.png'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
+  { name: 'User Management', href: '#', current: true },
   { name: 'Calendar', href: '#', current: false },
   { name: 'Documents', href: '#', current: false },
   { name: 'Reports', href: '#', current: false },
@@ -20,7 +20,7 @@ export default function AdminSidebar() {
           className="h-8 w-auto"
           src={FiverLogoShort}
         />
-        <span className="text-[1.1vw] font-bold"> ADMIN HOME PAGE</span>
+        <span className="text-[1.1vw] font-bold">ADMIN HOME PAGE</span>
       </div>
       <nav className="flex flex-1 flex-col">
         <ul role="list" className="flex flex-1 flex-col gap-y-7">

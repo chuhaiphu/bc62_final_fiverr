@@ -6,7 +6,9 @@ export const loginApi = async (payload: {
 }) => {
   try {
     const response = await api.post("/auth/signin", payload);
-    return response.data.content;
+    const user = response.data.content.user
+    localStorage.setItem('user', JSON.stringify(user))
+    return user
   } catch (error: any) {
     throw error.response.data;
   }
@@ -30,3 +32,21 @@ export const signUpApi = async (payload: {
     throw error.response.data;
   }
 };
+
+export const getAllUsersApi = async () => {
+  try {
+    const response = await api.get("/users");
+    return response.data.content;
+  } catch (error: any) {
+    throw error.response.data;
+  }
+}
+
+export const getAllUsersByPageIndex = async (pageIndex: number) => {
+  try {
+    const response = await api.get(`/users/phan-trang-tim-kiem?pageIndex=${pageIndex}&pageSize=10`);
+    return response.data.content.data;
+  } catch (error: any) {
+    throw error.response.data;
+  }
+}

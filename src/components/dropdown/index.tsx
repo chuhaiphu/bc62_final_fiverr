@@ -2,9 +2,9 @@ import { Box, Container, Link } from "@mui/material"
 import { useDropdown } from "~/hooks/dropDown-hook"
 import styles from './Dropdown.module.scss'
 
-export default function Dropdown({ props }: any) {
+export default function Dropdown({ renderDropdown, onSendData}: any) {
 
-  const { data, isLoading, error } = useDropdown(props)
+  const { data, isLoading, error } = useDropdown(renderDropdown)
 
   if (isLoading) {
     return <div>Loading data...</div>
@@ -15,7 +15,7 @@ export default function Dropdown({ props }: any) {
   };
   
   const handleJobClick = (jobId: number) => {
-    props.onSendata(jobId)
+    onSendData(jobId)
 };
   return (
     <>

@@ -11,6 +11,7 @@ import ListJobDetail from '../ListJobDetail';
 export default function HeaderListJob() {
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
+    const [selectedJobDetailId, setSelectedJobDetailId] = useState(-1);
     const [selectedJobId, setSelectedJobId] = useState(-1);
 
     const { data, isLoading, error } = useListJob()
@@ -25,7 +26,7 @@ export default function HeaderListJob() {
 
 
     const handleJobIdFromDropdown = (jobId: number) => {
-        setSelectedJobId(jobId);
+        setSelectedJobDetailId(jobId);
     };
 
 
@@ -79,7 +80,7 @@ export default function HeaderListJob() {
                                 >
                                     {dataItem.tenLoaiCongViec}
                                     <Box className={styles.dropdowncontent}>
-                                        <Dropdown onSendData= { () => handleJobIdFromDropdown} props={selectedJobId} />
+                                        <Dropdown onSendData={(jobId:number) => handleJobIdFromDropdown(jobId)} renderDropdown={selectedJobId} />
                                     </Box>
                                 </Link>
 
@@ -126,7 +127,7 @@ export default function HeaderListJob() {
                 </Box>
             </Container>
             <Container>
-                <ListJobDetail props={selectedJobId} />
+                <ListJobDetail props={selectedJobDetailId} />
             </Container>
         </>
     )

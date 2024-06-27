@@ -8,6 +8,8 @@ import { useUserStore } from '~/store/user-store';
 import CourseClassidicationPage from '~/pages/Course-Classification';
 import ServiceList from '~/pages/Admin/_Main/_List/Services';
 import UserList from '~/pages/Admin/_Main/_List/Users';
+import JobList from '~/pages/Admin/_Main/_List/Jobs';
+import JobTypeList from '~/pages/Admin/_Main/_List/JobTypes';
 
 // * for user
 const ProtectedRoute = () => {
@@ -27,7 +29,7 @@ const RestrictedRoute = () => {
     return <Navigate to="/login" replace />;
   }
 
-  if (user.role !== 'ADMIN') {
+  if (user.role?.toLowerCase() !== 'admin') {
     return <Navigate to="/" replace />;
   }
 
@@ -76,6 +78,14 @@ const routes = [
           {
             path: '/admin/users',
             element: <UserList />,
+          },
+          {
+            path: '/admin/jobs',
+            element: <JobList />,
+          },
+          {
+            path: '/admin/job-types',
+            element: <JobTypeList />,
           },
           {
             path: '/admin/services',

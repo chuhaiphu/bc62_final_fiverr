@@ -1,11 +1,13 @@
+import { Link, useLocation } from 'react-router-dom'
+import { useState } from 'react'
 import AdminAvatar from '~/assets/AdminAvatar.png'
 import FiverLogoShort from '~/assets/Fiverr-Logo-short.png'
 
 const navigation = [
-  { name: 'User Management', href: '#', current: true },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Documents', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
+  { name: 'User Management', href: 'users' },
+  { name: 'Job Management', href: 'jobs' },
+  { name: 'Job Type Management', href: 'job-types' },
+  { name: 'Service Management', href: 'services' },
 ]
 
 function classNames(...classes: string[]) {
@@ -13,6 +15,14 @@ function classNames(...classes: string[]) {
 }
 
 export default function AdminSidebar() {
+  const location = useLocation();
+
+  const getCurrentNavigation = () => {
+    const currentPath = location.pathname;
+    const currentNavItem = navigation.find((item) => currentPath.includes(item.href));
+    return currentNavItem ? currentNavItem.name : '';
+  };
+  
   return (
     <div className="h-full flex grow flex-col gap-y-5 overflow-y-auto border-r px-6">
       <div className="flex h-16 shrink-0 items-center">
@@ -28,18 +38,17 @@ export default function AdminSidebar() {
             <ul role="list" className="-mx-2 space-y-1">
               {navigation.map((item) => (
                 <li key={item.name}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     className={classNames(
-                      item.current ? 'bg-gray-50' : 'hover:bg-gray-50',
+                      getCurrentNavigation() === item.name ? 'bg-gray-200' : 'hover:bg-gray-50',
                       'block rounded-md py-2 pr-2 pl-10 text-sm leading-6 font-semibold text-gray-700'
                     )}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
-
             </ul>
           </li>
           <li className="-mx-6 mt-auto">

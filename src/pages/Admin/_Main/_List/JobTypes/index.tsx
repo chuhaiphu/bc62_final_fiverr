@@ -1,13 +1,13 @@
 import { TrashIcon, Cog6ToothIcon } from '@heroicons/react/16/solid'
 import { MagnifyingGlassIcon, ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
 import { useState } from "react";
-import { useGetAllServices } from "~/hooks/job-hook";
-import { CongViecDuocThue } from "~/types/CongViecDuocThue";
+import { useGetAllJobTypes } from "~/hooks/job-hook";
+import { LoaiCongViec } from "~/types/LoaiCongViec.type";
 
 const PAGE_SIZE = 10;
 
-export default function ServiceList() {
-  const { data: services, isLoading } = useGetAllServices();
+export default function JobTypeList() {
+  const { data: jobTypes, isLoading } = useGetAllJobTypes();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -15,15 +15,14 @@ export default function ServiceList() {
     return <div>Loading...</div>;
   }
 
-  const filteredServices = services?.filter((service: CongViecDuocThue) =>
-    service.maCongViec?.toString().includes(searchQuery.toLowerCase()) ||
-    service.maNguoiThue?.toString().includes(searchQuery.toLowerCase())
+  const filteredJobTypes = jobTypes?.filter((jobType: LoaiCongViec) =>
+    jobType.tenLoaiCongViec?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const totalPages = Math.ceil((services?.length || 0) / PAGE_SIZE);
+  const totalPages = Math.ceil((jobTypes?.length || 0) / PAGE_SIZE);
   const startIndex = (currentPage - 1) * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
-  const servicesInCurrentPage = filteredServices?.slice(startIndex, endIndex);
+  const jobTypesInCurrentPage = filteredJobTypes?.slice(startIndex, endIndex);
 
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
@@ -67,43 +66,24 @@ export default function ServiceList() {
             <table className="w-full divide-y divide-gray-300">
               <thead>
                 <tr>
-                  <th scope="col" className="w-10 py-3.5 px-8 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                    Service Id
+                  <th scope="col" className="w-30 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Job Type Id
                   </th>
                   <th scope="col" className="w-30 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Job Id & User Rent Id
-                  </th>
-                  <th scope="col" className="py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Due date
-                  </th>
-                  <th scope="col" className="py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Status
+                    Job Type Description
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {servicesInCurrentPage?.map((service: CongViecDuocThue) => (
-                  <tr key={service.id}>
-                    <td className="whitespace-nowrap py-5 text-sm text-gray-500">
-                      <div className="w-64 truncate">{service.id}</div>
-                    </td>
-                    <td className="whitespace-nowrap py-5 px-8 pl-4 text-sm sm:pl-0">
+                {jobTypesInCurrentPage?.map((jobType: LoaiCongViec) => (
+                  <tr key={jobType.id}>
+                    <td className="whitespace-nowrap py-5 px-8 text-sm sm:pl-0">
                       <div className="ml-4">
-                        <div className="font-medium text-gray-900">{service.maCongViec}</div>
-                        <div className="mt-1 text-gray-500">{service.maNguoiThue}</div>
+                        <div className="font-medium text-gray-900">{jobType.id}</div>
                       </div>
                     </td>
-                    <td className="whitespace-nowrap py-5 text-sm text-gray-500">
-                      {service.ngayThue?.toString()}
-                    </td>
-                    <td className="whitespace-nowrap py-5 text-sm text-gray-500">
-                      {service.hoanThanh! ?
-                        <span className="inline-flex items-center rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-yellow-600/20">
-                          Not finished
-                        </span> :
-                        <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                          Finished
-                        </span>}
+                    <td className="whitespace-nowrap py-5 text-left text-sm text-gray-500">
+                      <div>{jobType.tenLoaiCongViec}</div>
                     </td>
                     <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <a href="#" className="text-indigo-600 hover:text-indigo-900">
@@ -117,7 +97,6 @@ export default function ServiceList() {
                     </td>
                   </tr>
                 ))}
-
               </tbody>
             </table>
           </div>

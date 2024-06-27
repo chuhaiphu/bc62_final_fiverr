@@ -33,6 +33,26 @@ export const signUpApi = async (payload: {
   }
 };
 
+export const addAdminApi = async (payload: {
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  birthday: string;
+  gender: boolean;
+  role: string;
+  skill: string[];
+  certification: string[];
+}) => {
+  try {
+    const response = await api.post("/users", payload);
+    return response.data.content;
+  } catch (error: any) {
+    throw error.response.data;
+  }
+};
+
+
 export const getAllUsersApi = async () => {
   try {
     const response = await api.get("/users");
@@ -45,6 +65,15 @@ export const getAllUsersApi = async () => {
 export const getAllUsersByPageIndex = async (pageIndex: number) => {
   try {
     const response = await api.get(`/users/phan-trang-tim-kiem?pageIndex=${pageIndex}&pageSize=10`);
+    return response.data.content.data;
+  } catch (error: any) {
+    throw error.response.data;
+  }
+}
+
+export const deleteUserApi = async (userId: number) => {
+  try {
+    const response = await api.delete(`/users/${userId}`);
     return response.data.content.data;
   } catch (error: any) {
     throw error.response.data;

@@ -1,13 +1,13 @@
+import { CongViec } from "~/types/CongViec.type";
 import { TrashIcon, Cog6ToothIcon } from '@heroicons/react/16/solid'
 import { MagnifyingGlassIcon, ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
 import { useState } from "react";
-import { useGetAllServices } from "~/hooks/job-hook";
-import { CongViecDuocThue } from "~/types/CongViecDuocThue";
+import { useGetAllJobs } from "~/hooks/job-hook";
 
 const PAGE_SIZE = 10;
 
-export default function ServiceList() {
-  const { data: services, isLoading } = useGetAllServices();
+export default function JobList() {
+  const { data: jobs, isLoading } = useGetAllJobs();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -15,15 +15,16 @@ export default function ServiceList() {
     return <div>Loading...</div>;
   }
 
-  const filteredServices = services?.filter((service: CongViecDuocThue) =>
-    service.maCongViec?.toString().includes(searchQuery.toLowerCase()) ||
-    service.maNguoiThue?.toString().includes(searchQuery.toLowerCase())
+  const filteredJobs = jobs?.filter((job: CongViec) =>
+    job.tenCongViec?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    job.moTa?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    job.moTaNgan?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const totalPages = Math.ceil((services?.length || 0) / PAGE_SIZE);
+  const totalPages = Math.ceil((jobs?.length || 0) / PAGE_SIZE);
   const startIndex = (currentPage - 1) * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
-  const servicesInCurrentPage = filteredServices?.slice(startIndex, endIndex);
+  const jobsInCurrentPage = filteredJobs?.slice(startIndex, endIndex);
 
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
@@ -67,43 +68,51 @@ export default function ServiceList() {
             <table className="w-full divide-y divide-gray-300">
               <thead>
                 <tr>
-                  <th scope="col" className="w-10 py-3.5 px-8 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                    Service Id
+                  <th scope="col" className="w-20 py-3.5 px-8 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                    Job Image & Overview
                   </th>
-                  <th scope="col" className="w-30 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Job Id & User Rent Id
+                  <th scope="col" className="w-20 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Job Description
                   </th>
-                  <th scope="col" className="py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Due date
-                  </th>
-                  <th scope="col" className="py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Status
+                  <th scope="col" className="py-3.5 px-1 text-left text-sm font-semibold text-gray-900">
+                    Job Marks
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {servicesInCurrentPage?.map((service: CongViecDuocThue) => (
-                  <tr key={service.id}>
-                    <td className="whitespace-nowrap py-5 text-sm text-gray-500">
-                      <div className="w-64 truncate">{service.id}</div>
-                    </td>
+                {jobsInCurrentPage?.map((job: CongViec) => (
+                  <tr key={job.id}>
                     <td className="whitespace-nowrap py-5 px-8 pl-4 text-sm sm:pl-0">
-                      <div className="ml-4">
-                        <div className="font-medium text-gray-900">{service.maCongViec}</div>
-                        <div className="mt-1 text-gray-500">{service.maNguoiThue}</div>
+                      <div className="flex items-center">
+                        <div className="h-11 w-11 flex-shrink-0">
+                          <img className="h-11 w-11" src={job.hinhAnh} alt="" />
+                        </div>
+                        <div className="ml-4">
+                          <div className="font-medium text-gray-900">{job.tenCongViec}</div>
+                        </div>
                       </div>
                     </td>
-                    <td className="whitespace-nowrap py-5 text-sm text-gray-500">
-                      {service.ngayThue?.toString()}
+                    <td className="whitespace-nowrap py-5 pr-16 text-sm text-gray-500">
+                      <div className="w-64 truncate">{job.moTa}</div>
                     </td>
                     <td className="whitespace-nowrap py-5 text-sm text-gray-500">
-                      {service.hoanThanh! ?
-                        <span className="inline-flex items-center rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-yellow-600/20">
-                          Not finished
-                        </span> :
-                        <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                          Finished
-                        </span>}
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, index) => (
+                          <svg
+                            key={index}
+                            className={`w-5 h-5 ${index < job.saoCongViec! ? 'text-yellow-400' : 'text-gray-300'}`}
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 15.585l-4.326 2.273 1.039-4.814L3.286 9.56l4.842-.703L10 4.415l1.872 4.442 4.842.703-3.427 3.484 1.039 4.814L10 15.585z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        ))}
+                      </div>
                     </td>
                     <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <a href="#" className="text-indigo-600 hover:text-indigo-900">
@@ -117,7 +126,6 @@ export default function ServiceList() {
                     </td>
                   </tr>
                 ))}
-
               </tbody>
             </table>
           </div>

@@ -4,7 +4,8 @@ import Login from '~/pages/Auth/Login';
 import Register from '~/pages/Auth/Register';
 import AdminPage from '~/pages/Admin';
 import UserDetailPage from '~/pages/UserDetail';
-import CourseClassidicationPage from '~/pages/Course-Classification'
+import CourseClassidicationPage from '~/pages/ListJobTypeJob'
+import ListJobPage from '~/pages/ListJob';
 
 const ProtectedRoute = () => {
   return <Outlet />
@@ -42,8 +43,14 @@ const routes = [
 
   },
   {
-    path: "course-classification",
+    path: "list-job-&-type-job",
     element: <CourseClassidicationPage/>,
+
+  }
+  ,
+  {
+    path: "list-job",
+    element: <ListJobPage/>,
 
   }
 ];

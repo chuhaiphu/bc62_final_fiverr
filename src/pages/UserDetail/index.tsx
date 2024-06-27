@@ -1,5 +1,5 @@
 import Footer from "~/components/Footer";
-import HeaderUserDetail from "~/components/Header-Userdetail";
+import HeaderUserDetail from "~/components/Header-ListJobTypeJob";
 import UserDetail from "~/components/UserDetailContent";
 
 

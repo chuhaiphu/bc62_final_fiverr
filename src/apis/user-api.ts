@@ -71,10 +71,30 @@ export const getAllUsersByPageIndex = async (pageIndex: number) => {
   }
 }
 
-export const deleteUserApi = async (userId: number) => {
+export const updateUserApi = async ({ userId, payload }: { userId: number, payload: {
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  birthday: string;
+  gender: boolean;
+  role: string;
+  skill: string[];
+  certification: string[];
+}}) => {
   try {
-    const response = await api.delete(`/users/${userId}`);
-    return response.data.content.data;
+    const response = await api.put(`/users/${userId}`, payload);
+    return response.data.content;
+  } catch (error: any) {
+    throw error.response.data;
+  }
+};
+
+
+export const deleteUserApi = async (id: number) => {
+  try {
+    const response = await api.delete(`/users/?id=${id}`);
+    return response.data.content;
   } catch (error: any) {
     throw error.response.data;
   }

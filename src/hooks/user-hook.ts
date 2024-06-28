@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { addAdminApi, deleteUserApi, getAllUsersApi, getAllUsersByPageIndex, loginApi, signUpApi } from '~/apis/user-api'
+import { addAdminApi, deleteUserApi, getAllUsersApi, getAllUsersByPageIndex, loginApi, signUpApi, updateUserApi } from '~/apis/user-api'
 import { User } from '~/types/User.type'
 
 export const useLogin = (onSuccess?: (data: User) => void, onError?: (error: Error) => void) => {
@@ -13,6 +13,14 @@ export const useLogin = (onSuccess?: (data: User) => void, onError?: (error: Err
 export const useSignUp = (onSuccess?: () => void, onError?: (error: Error) => void) => {
   return useMutation({
     mutationFn: signUpApi,
+    onSuccess: onSuccess,
+    onError: onError
+  })
+}
+
+export const useUpdateUser = (onSuccess?: () => void, onError?: (error: Error) => void) => {
+  return useMutation({
+    mutationFn: updateUserApi,
     onSuccess: onSuccess,
     onError: onError
   })

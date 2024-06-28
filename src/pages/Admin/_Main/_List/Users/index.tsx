@@ -5,6 +5,7 @@ import { MagnifyingGlassIcon, ArrowLongLeftIcon, ArrowLongRightIcon } from '@her
 import { useState } from "react";
 import AddAdminModal from "./AddAdminModal";
 import Swal from "sweetalert2";
+import UpdateUserModal from "./UpdateUserModal";
 
 const PAGE_SIZE = 10;
 
@@ -12,16 +13,45 @@ export default function UserList() {
   const { data: users, isLoading, refetch } = useGetAllUsers();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [selectingUser, setSelectingUser] = useState<User | null>(null);
 
+  // * add admin operation
+  const openAddModal = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const closeAddModal = () => {
+    setIsAddModalOpen(false);
+  };
+  const handleAddAdmin = () => {
+    closeAddModal();
+    refetch();
+  };
+
+  // * update user operation
+  const openUpdateModal = (user: User) => {
+    setSelectingUser(user)
+    setIsUpdateModalOpen(true);
+  };
+  const closeUpdateModal = () => {
+    setIsUpdateModalOpen(false);
+  };
+  const handleUpdateUser = () => {
+    closeUpdateModal();
+    refetch();
+  };
+
+  // * delete user operation
   const onSuccess = () => {
     Swal.fire({
       icon: 'success',
       title: 'Success',
       text: 'User deleted successfully',
     });
+    refetch();
   };
-
   const onError = (error: any) => {
     console.log(error)
     Swal.fire({
@@ -30,19 +60,21 @@ export default function UserList() {
       text: error + ' Please try again later.',
     });
   };
-
   const { mutate: deleteUser } = useDeleteUser(onSuccess, onError);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-  const handleAddAdmin = () => {
-    closeModal();
-    refetch();
+  const handleDeleteUser = (userId: number) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteUser(userId);
+      }
+    });
   };
 
   if (isLoading) {
@@ -75,7 +107,7 @@ export default function UserList() {
           <div className="sm:mt-0 sm:pt-4 sm:pb-2 lg:pt-6 lg:pb-4">
             <button
               type="button"
-              onClick={openModal}
+              onClick={openAddModal}
               className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
             >
               Add new Admin
@@ -104,10 +136,13 @@ export default function UserList() {
               <table className="min-w-full divide-y divide-gray-300">
                 <thead>
                   <tr>
+                    <th scope="col" className="w-30 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      User Id
+                    </th>
                     <th scope="col" className="w-20 py-3.5 px-8 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                       Name & Email
                     </th>
-                    <th scope="col" className="w-30 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    <th scope="col" className="w-20 py-3.5 pr-16 text-left text-sm font-semibold text-gray-900">
                       Birthday
                     </th>
                     <th scope="col" className="w-30 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -121,6 +156,9 @@ export default function UserList() {
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {usersInCurrentPage?.map((user: User) => (
                     <tr key={user.email}>
+                      <td className="whitespace-nowrap py-5 text-sm text-gray-500">
+                        <div className="mt-1 text-gray-500">{user.id}</div>
+                      </td>
                       <td className="whitespace-nowrap py-5 px-8 pl-4 text-sm sm:pl-0">
                         <div className="flex items-center">
                           <div className="h-11 w-11 flex-shrink-0">
@@ -132,7 +170,7 @@ export default function UserList() {
                           </div>
                         </div>
                       </td>
-                      <td className="whitespace-nowrap py-5 text-sm text-gray-500">
+                      <td className="whitespace-nowrap py-5 pr-16 text-sm text-gray-500">
                         <div className="mt-1 text-gray-500">{user.birthday}</div>
                       </td>
                       <td className="whitespace-nowrap py-5 text-sm text-gray-500">
@@ -148,14 +186,14 @@ export default function UserList() {
                           </span>}
                       </td>
                       <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                        <button className="text-indigo-600 hover:text-indigo-900" onClick={() => openUpdateModal(user)}>
                           <Cog6ToothIcon className="h-5 w-5" />
-                        </a>
+                        </button>
                       </td>
                       <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                        <a href="#" className="text-red-600 hover:text-red-900" onClick={() => deleteUser(user.id!)}>
+                        <button className="text-red-600 hover:text-red-900" onClick={() => handleDeleteUser(user.id!)}>
                           <TrashIcon className="h-5 w-5" />
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -201,7 +239,8 @@ export default function UserList() {
           </div>
         </nav>
       </div>
-      <AddAdminModal isOpen={isModalOpen} onClose={closeModal} onAddAdmin={handleAddAdmin} />
+      <AddAdminModal isOpen={isAddModalOpen} onClose={closeAddModal} onAddAdmin={handleAddAdmin} />
+      <UpdateUserModal isOpen={isUpdateModalOpen} onClose={closeUpdateModal} onUpdateUser={handleUpdateUser} selectingUser={selectingUser!} />
     </>
 
   )

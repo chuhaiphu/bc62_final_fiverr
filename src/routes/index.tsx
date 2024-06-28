@@ -95,6 +95,27 @@ const routes = [
       },
     ],
   },
+  //   path: "user-detail",
+  //   element: <UserDetailPage/>,
+
+  // },
+  // {
+  //   path: "list-job-&-type-job",
+  //   element: <CourseClassidicationPage/>,
+
+  // }
+  // ,
+  // {
+  //   path: "list-job",
+  //   element: <ListJobPage/>,
+
+  // }
+  // ,
+  // {
+  //   path: "job-detail",
+  //   element: <JobDetailPage/>,
+
+  // }
 ];
 
 const RouteElements = () => {

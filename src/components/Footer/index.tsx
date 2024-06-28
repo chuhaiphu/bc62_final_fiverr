@@ -12,7 +12,7 @@ export default function Footer() {
             <Container maxWidth="lg">
                 <Box className={styles.navBar}>
                     <Box>
-                        <h2>Categories</h2>
+                        <h3>Categories</h3>
                         <Link>  Digital Marketing</Link>
                         <Link> Writing & Translation </Link>
                         <Link> Video & Animation </Link>
@@ -24,7 +24,7 @@ export default function Footer() {
                         <Link>Sitemap</Link>
                     </Box>
                     <Box>
-                        <h2>About</h2>
+                        <h3>About</h3>
                         <Link>Careers </Link>
                         <Link>Press & News </Link>
                         <Link>Partnerships </Link>
@@ -34,14 +34,14 @@ export default function Footer() {
                         <Link>Investor Relations </Link>
                     </Box>
                     <Box>
-                        <h2>Support</h2>
+                        <h3>Support</h3>
                         <Link>Help & Support</Link>
                         <Link>Trust & Safety</Link>
                         <Link>Selling in Fiverr</Link>
                         <Link>Buying om Fiverr</Link>
                     </Box>
                     <Box>
-                        <h2>Community</h2>
+                        <h3>Community</h3>
                         <Link>Event</Link>
                         <Link>Blog</Link>
                         <Link>Forum</Link>
@@ -56,7 +56,7 @@ export default function Footer() {
                         </Link>
                     </Box>
                     <Box>
-                        <h2>More From Fiverr</h2>
+                        <h3>More From Fiverr</h3>
                         <Link>Fiverr Business</Link>
                         <Link>Fiverr Pro</Link>
                         <Link>Fiverr Studios</Link>

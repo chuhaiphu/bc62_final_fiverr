@@ -10,6 +10,7 @@ import ServiceList from '~/pages/Admin/_Main/_List/Services';
 import UserList from '~/pages/Admin/_Main/_List/Users';
 import JobList from '~/pages/Admin/_Main/_List/Jobs';
 import JobTypeList from '~/pages/Admin/_Main/_List/JobTypes';
+import ListJobPage from '~/pages/ListJob';
 
 // * for user
 const ProtectedRoute = () => {
@@ -18,7 +19,7 @@ const ProtectedRoute = () => {
   if (!user) {
     return <Navigate to="/login" replace />;
   }
-  
+
   return <Outlet />;
 };
 
@@ -53,6 +54,11 @@ const routes = [
     path: '/user',
     element: <ProtectedRoute />,
     children: [
+      {
+        path: "list-job",
+        element: <ListJobPage />,
+
+      },
       {
         path: '/user/course',
         element: <CourseClassidicationPage />,

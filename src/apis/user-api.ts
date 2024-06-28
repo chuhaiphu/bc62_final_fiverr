@@ -29,7 +29,7 @@ export const signUpApi = async (payload: {
     const response = await api.post("/auth/signup", payload);
     return response.data.content;
   } catch (error: any) {
-    throw error.response.data;
+    throw error.response.data.content;
   }
 };
 

@@ -1,9 +1,10 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form'
 import FiverLogo from '~/assets/Fiverr_Logo_Black.png'
 import { useLogin } from '~/hooks/user-hook'
 import { User } from '~/types/User.type';
 import Swal from 'sweetalert2';
+import { useUserStore } from '~/store/user-store';
 
 type FormFields = {
   email: string;
@@ -16,8 +17,9 @@ export default function Login() {
   const onSubmit: SubmitHandler<FormFields> = (data) => {
     login(data)
   }
+  const setUser = useUserStore((state) => state.setUser);
   const onSuccess = (user: User) => {
-    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
     navigate('/')
   };
   const onError = (error: any) => {
@@ -124,9 +126,9 @@ export default function Login() {
                 </form>
                 <p className="mt-10 text-center text-sm text-gray-500">
                   Not a member?{' '}
-                  <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                  <Link to="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                     Sign up now
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>

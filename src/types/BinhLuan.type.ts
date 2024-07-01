@@ -1,8 +1,8 @@
 export type BinhLuan = {
   id?:              number;
-  maCongViec?:      number;
+  maCongViec?:      any;
   maNguoiBinhLuan?: number;
-  ngayBinhLuan?:    string;
+  ngayBinhLuan?:    Date;
   noiDung?:         string;
   saoBinhLuan?:     number;
 }

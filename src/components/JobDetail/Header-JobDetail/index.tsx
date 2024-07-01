@@ -5,6 +5,7 @@ import { useListJob } from '~/hooks/listJob-typejob-hook';
 import Dropdown from '~/components/ListJob/dropdown';
 import { useState } from 'react';
 import JobDetails from '../JobDetails';
+import AddComment from '../Add-Comment';
 
 export default function HeaderJobDetail() {
 
@@ -90,6 +91,9 @@ export default function HeaderJobDetail() {
             
             <Container>
                 <JobDetails props={selectedJobDetailId} />
+            </Container>
+            <Container>
+                <AddComment props={selectedJobDetailId}/>
             </Container>
         </>
     )

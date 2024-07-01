@@ -1,15 +1,15 @@
 
 import { Container } from "@mui/material";
-import CourseClassificationCarousel from "~/components/CourseClassification-carosel";
-import CourseClassificationServicesRelated from "~/components/CourseClassification-ServicesRelated";
+import CourseClassificationCarousel from "~/components/ListJob-TypeJob/CourseClassification-carosel";
+import CourseClassificationServicesRelated from "~/components/ListJob-TypeJob/CourseClassification-ServicesRelated";
 import Footer from "~/components/Footer";
-import HeaderUserDetail from "~/components/Header-Userdetail";
+import HeaderUserDetails from "~/components/User/Header-Userdetails";
 
 
 export default function CourseClassidicationPage() {
   return (
     <>
-      <HeaderUserDetail />
+      <HeaderUserDetails />
       <CourseClassificationCarousel />
       <CourseClassificationServicesRelated />
       <Container>

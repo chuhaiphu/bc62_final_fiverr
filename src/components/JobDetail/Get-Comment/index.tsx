@@ -5,7 +5,7 @@ import { useGetComment } from "~/hooks/getComment-hook"
 
 export default function Comment({ props }: any) {
 
-    const { data, isLoading, error } = useGetComment(props)
+    const { data, isLoading, refetch , error } = useGetComment(props)
     if (isLoading) {
         return <div>Loading data...</div>
     }
@@ -14,6 +14,7 @@ export default function Comment({ props }: any) {
         return <div>Error loading data: {error.message}</div>
     };
 
+  
     return (
         < >
             {data && data.map((dataItem: any) => (

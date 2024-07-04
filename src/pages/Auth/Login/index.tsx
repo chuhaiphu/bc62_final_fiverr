@@ -20,7 +20,11 @@ export default function Login() {
   const setUser = useUserStore((state) => state.setUser);
   const onSuccess = (user: User) => {
     setUser(user);
-    navigate('/')
+    if (user.role?.toLocaleLowerCase() === 'admin') {
+      navigate('/admin');
+    } else {
+      navigate('/');
+    }
   };
   const onError = (error: any) => {
     if (error && error.content == 'Email hoặc mật khẩu không đúng !') {

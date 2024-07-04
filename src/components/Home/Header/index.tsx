@@ -9,8 +9,20 @@ import PnGLogo from '~/assets/PnGLogo.png'
 import styles from './Header.module.scss'
 import SearchIcon from '@mui/icons-material/Search'
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded'
+import { useUserStore } from '~/store/user-store'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
+  const user = useUserStore((state) => state.user);
+  const removeUser = useUserStore((state) => state.removeUser);
+  const handleSignOut = async () => {
+    try {
+      removeUser();
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
   return (
     <>
       <CssBaseline />
@@ -22,17 +34,37 @@ export default function Header() {
               <img src={FiverrLogo} alt="Fiverr Logo" className={styles.fiverrLogo} />
             </Box>
             <Box>
-              <Box className={styles.navBarRight}>
-                <Button>
-                  Become a seller
-                </Button>
-                <Button>
-                  Sign In
-                </Button>
-                <Button variant='outlined' color='inherit'>
-                  Join
-                </Button>
-              </Box>
+              {user ?
+                <Box className={styles.navBarRight}>
+                  <Button>
+                    Welcome
+                  </Button>
+                  <Button>
+                    <Link to="/user/detail">
+                      {user.name}
+                    </Link>
+
+                  </Button>
+                  <Button variant='outlined' color='inherit' onClick={handleSignOut}>
+                    Sign out
+                  </Button>
+                </Box> :
+                <Box className={styles.navBarRight}>
+                  <Button>
+                    Become a seller
+                  </Button>
+                  <Button>
+                    <Link to="/login">
+                      Sign In
+                    </Link>
+                  </Button>
+                  <Button variant='outlined' color='inherit'>
+                    <Link to="/register">
+                      Join
+                    </Link>
+                  </Button>
+                </Box>
+              }
             </Box>
           </Box>
           <Box className={styles.mainHeader}>
@@ -98,11 +130,11 @@ export default function Header() {
 
       </Container>
       <Box className={styles.trustedBy}>
-        <span style={{paddingBottom: '0.5vh', fontWeight: 'bold', color:'grey'}}>Trusted by:</span>
+        <span style={{ paddingBottom: '0.5vh', fontWeight: 'bold', color: 'grey' }}>Trusted by:</span>
         <span><img src={FacebookLogo} alt="" /></span>
         <span><img src={GoogleLogo} alt="" /></span>
-        <span style={{margin: '0 2vw'}}><img src={NetflixLogo} style={{width: '130%'}} alt="" /></span>
-        <span style={{margin: '0 4vw'}}><img src={PnGLogo} style={{width: '130%',}} alt="" /></span>
+        <span style={{ margin: '0 2vw' }}><img src={NetflixLogo} style={{ width: '130%' }} alt="" /></span>
+        <span style={{ margin: '0 4vw' }}><img src={PnGLogo} style={{ width: '130%', }} alt="" /></span>
         <span><img src={PaypalLogo} alt="" /></span>
       </Box>
     </>

@@ -61,7 +61,7 @@ const routes = [
     element: <CourseClassidicationPage/>,
   },
   {
-    path: "list-job",
+    path: "list-job/:id?",
     element: <ListJobPage/>,
   },
   {

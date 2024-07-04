@@ -8,9 +8,10 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Switch from '@mui/material/Switch';
 import ListJobDetail from '../ListJobDetail';
 
+
 export default function HeaderListJob() {
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
-
+    
     const [selectedJobDetailId, setSelectedJobDetailId] = useState(-1);
     const [selectedJobId, setSelectedJobId] = useState(-1);
 
@@ -24,14 +25,11 @@ export default function HeaderListJob() {
         return <div>Error loading data: {error.message}</div>
     };
 
-
-    const handleJobIdFromDropdown = (jobId: number) => {
+    const handleJobIdFromDropdown = (jobId: any) => {
         setSelectedJobDetailId(jobId);
     };
 
-
-
-    const handleJobClick = (jobId: number) => {
+    const handleJobClick = (jobId: any) => {
         setSelectedJobId(jobId);
     };
 

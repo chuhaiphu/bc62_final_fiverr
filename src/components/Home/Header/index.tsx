@@ -9,8 +9,31 @@ import PnGLogo from '~/assets/PnGLogo.png'
 import styles from './Header.module.scss'
 import SearchIcon from '@mui/icons-material/Search'
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded'
+import { useState } from 'react'
+import { useSearch } from '~/hooks/search-hook'
+import { useNavigate } from 'react-router-dom'
 
 export default function Header() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+  
+  const { data, isLoading, error } = useSearch(searchQuery)
+
+  
+  const handleSearch = () => {
+    if (isLoading) {
+      return <div>Loading data...</div>
+    }
+  
+    if (error) {
+      return <div>Error loading data: {error.message}</div>
+    }; 
+
+    if(data){
+        navigate(`/list-job/${searchQuery}`)
+    }
+  };
+ 
   return (
     <>
       <CssBaseline />
@@ -50,13 +73,14 @@ export default function Header() {
                   size='small'
                   fullWidth={true}
                   placeholder="Try everything - Shakira"
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   InputProps={{
                     startAdornment: <InputAdornment position="start"><SearchIcon></SearchIcon></InputAdornment>,
                     disableUnderline: true,
                     style: { paddingTop: '0.2vh', marginLeft: '1vw', height: '100%', display: 'flex', alignItems: 'center' }
                   }}
                 />
-                <Button className={styles.searchButton} variant="contained" disableElevation={true}>Search</Button>
+                <Button onClick={() => handleSearch()} className={styles.searchButton} variant="contained" disableElevation={true}>Search</Button>
               </Box>
               <Box className={styles.popularTag}>
                 <Typography variant='subtitle2' sx={{ fontWeight: 'bold', color: 'white' }}>

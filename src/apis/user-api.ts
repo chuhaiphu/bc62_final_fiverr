@@ -8,6 +8,7 @@ export const loginApi = async (payload: {
     const response = await api.post("/auth/signin", payload);
     const user = response.data.content.user
     localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('userToken', JSON.stringify(response.data.content.token))
     return user
   } catch (error: any) {
     throw error.response.data;

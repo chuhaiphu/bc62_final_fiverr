@@ -1,12 +1,12 @@
 import Footer from "~/components/Footer";
-import HeaderUserDetail from "~/components/Header-Userdetail";
-import UserDetail from "~/components/UserDetailContent";
+import HeaderUserDetails from "~/components/User/Header-Userdetails";
+import UserDetail from "~/components/User/UserDetailContent";
 
 
 export default function UserDetailPage() {
   return (
     <>
-      <HeaderUserDetail/>
+      <HeaderUserDetails/>
       <UserDetail/>
       <Footer/>
     </>

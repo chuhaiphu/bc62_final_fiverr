@@ -11,6 +11,8 @@ import UserList from '~/pages/Admin/_Main/_List/Users';
 import JobList from '~/pages/Admin/_Main/_List/Jobs';
 import JobTypeList from '~/pages/Admin/_Main/_List/JobTypes';
 import ListJobPage from '~/pages/ListJob';
+import UserDetailPage from '~/pages/UserDetail';
+import JobDetailPage from '~/pages/JobDetail';
 
 // * for user
 const ProtectedRoute = () => {
@@ -51,6 +53,22 @@ const routes = [
     element: <Register />,
   },
   {
+    path: "user-detail",
+    element: <UserDetailPage/>,
+  },
+  {
+    path: "list-job-&-type-job",
+    element: <CourseClassidicationPage/>,
+  },
+  {
+    path: "list-job",
+    element: <ListJobPage/>,
+  },
+  {
+    path: "job-detail",
+    element: <JobDetailPage/>,
+  },
+  {
     path: '/user',
     element: <ProtectedRoute />,
     children: [
@@ -67,6 +85,7 @@ const routes = [
         path: '/user/detail',
         element: <UserDetail />,
       },
+      
     ],
   },
   {
@@ -101,27 +120,8 @@ const routes = [
       },
     ],
   },
-  //   path: "user-detail",
-  //   element: <UserDetailPage/>,
 
-  // },
-  // {
-  //   path: "list-job-&-type-job",
-  //   element: <CourseClassidicationPage/>,
 
-  // }
-  // ,
-  // {
-  //   path: "list-job",
-  //   element: <ListJobPage/>,
-
-  // }
-  // ,
-  // {
-  //   path: "job-detail",
-  //   element: <JobDetailPage/>,
-
-  // }
 ];
 
 const RouteElements = () => {

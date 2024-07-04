@@ -36,12 +36,12 @@ export default function JobTypeList() {
     <div className="mb-5 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto border-b border-gray-200">
         <div className="sm:mt-0 sm:pt-4 sm:pb-2 lg:pt-6 lg:pb-4">
-          <button
+          {/* <button
             type="button"
             className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
           >
             Create new job
-          </button>
+          </button> */}
         </div>
       </div>
       <div>
@@ -85,7 +85,7 @@ export default function JobTypeList() {
                     <td className="whitespace-nowrap py-5 text-left text-sm text-gray-500">
                       <div>{jobType.tenLoaiCongViec}</div>
                     </td>
-                    <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                    {/* <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <a href="#" className="text-indigo-600 hover:text-indigo-900">
                         <Cog6ToothIcon className="h-5 w-5" />
                       </a>
@@ -94,7 +94,7 @@ export default function JobTypeList() {
                       <a href="#" className="text-red-600 hover:text-red-900">
                         <TrashIcon className="h-5 w-5" />
                       </a>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

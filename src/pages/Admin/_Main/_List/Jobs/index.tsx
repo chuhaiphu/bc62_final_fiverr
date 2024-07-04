@@ -2,14 +2,82 @@ import { CongViec } from "~/types/CongViec.type";
 import { TrashIcon, Cog6ToothIcon } from '@heroicons/react/16/solid'
 import { MagnifyingGlassIcon, ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
 import { useState } from "react";
-import { useGetAllJobs } from "~/hooks/job-hook";
+import { useDeleteJob, useGetAllJobs } from "~/hooks/job-hook";
+import UpdateJobModal from "./UpdateJobModal";
+import AddJobModal from "./AddJobModal";
+import Swal from "sweetalert2";
 
 const PAGE_SIZE = 10;
 
 export default function JobList() {
-  const { data: jobs, isLoading } = useGetAllJobs();
+  const { data: jobs, isLoading, refetch } = useGetAllJobs();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isAddJobModalOpen, setIsAddJobModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [selectingJob, setSelectingJob] = useState<CongViec | null>(null);
+  const openAddJobModal = () => {
+    setIsAddJobModalOpen(true);
+  };
+
+  const closeAddJobModal = () => {
+    setIsAddJobModalOpen(false);
+  };
+
+  const handleAddJob = () => {
+    closeAddJobModal();
+    refetch();
+  };
+
+  const openUpdateModal = (job: CongViec) => {
+    setSelectingJob(job);
+    setIsUpdateModalOpen(true);
+  };
+
+  const closeUpdateModal = () => {
+    setIsUpdateModalOpen(false);
+  };
+
+  const handleUpdateJob = () => {
+    closeUpdateModal();
+    refetch();
+  };
+
+  const onDeleteSuccess = () => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: 'Job deleted successfully',
+    });
+    refetch();
+  };
+
+  const onDeleteError = (error: any) => {
+    console.log(error)
+    Swal.fire({
+      icon: 'error',
+      title: 'Failed',
+      text: error.content,
+    });
+  };
+
+  const { mutate: deleteJob } = useDeleteJob(onDeleteSuccess, onDeleteError);
+
+  const handleDeleteJob = (jobId: number) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteJob(jobId);
+      }
+    });
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -40,6 +108,7 @@ export default function JobList() {
         <div className="sm:mt-0 sm:pt-4 sm:pb-2 lg:pt-6 lg:pb-4">
           <button
             type="button"
+            onClick={openAddJobModal}
             className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
           >
             Create new job
@@ -69,6 +138,9 @@ export default function JobList() {
               <thead>
                 <tr>
                   <th scope="col" className="w-20 py-3.5 px-8 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                    Job Id
+                  </th>
+                  <th scope="col" className="w-20 py-3.5 px-8 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                     Job Image & Overview
                   </th>
                   <th scope="col" className="w-20 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -82,6 +154,9 @@ export default function JobList() {
               <tbody className="divide-y divide-gray-200 bg-white">
                 {jobsInCurrentPage?.map((job: CongViec) => (
                   <tr key={job.id}>
+                    <td className="whitespace-nowrap py-5 pr-16 text-sm text-gray-500">
+                      <div className="truncate">{job.id}</div>
+                    </td>
                     <td className="whitespace-nowrap py-5 px-8 pl-4 text-sm sm:pl-0">
                       <div className="flex items-center">
                         <div className="h-11 w-11 flex-shrink-0">
@@ -115,14 +190,17 @@ export default function JobList() {
                       </div>
                     </td>
                     <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                      <button className="text-indigo-600 hover:text-indigo-900" onClick={() => openUpdateModal(job)}>
                         <Cog6ToothIcon className="h-5 w-5" />
-                      </a>
+                      </button>
                     </td>
                     <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <a href="#" className="text-red-600 hover:text-red-900">
+                      <button
+                        onClick={() => handleDeleteJob(job.id!)}
+                        className="text-red-600 hover:text-red-900"
+                      >
                         <TrashIcon className="h-5 w-5" />
-                      </a>
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -167,6 +245,8 @@ export default function JobList() {
           </button>
         </div>
       </nav>
+      <AddJobModal isOpen={isAddJobModalOpen} onClose={closeAddJobModal} onAddJob={handleAddJob} />
+      <UpdateJobModal isOpen={isUpdateModalOpen} onClose={closeUpdateModal} onUpdateJob={handleUpdateJob} selectingJob={selectingJob!} />
     </div>
 
   )

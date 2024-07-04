@@ -10,6 +10,7 @@ import styles from './Header.module.scss'
 import SearchIcon from '@mui/icons-material/Search'
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded'
 import { useUserStore } from '~/store/user-store'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
   const user = useUserStore((state) => state.user);
@@ -39,7 +40,10 @@ export default function Header() {
                     Welcome
                   </Button>
                   <Button>
-                    {user.name}
+                    <Link to="/user/detail">
+                      {user.name}
+                    </Link>
+
                   </Button>
                   <Button variant='outlined' color='inherit' onClick={handleSignOut}>
                     Sign out
@@ -50,10 +54,14 @@ export default function Header() {
                     Become a seller
                   </Button>
                   <Button>
-                    Sign In
+                    <Link to="/login">
+                      Sign In
+                    </Link>
                   </Button>
                   <Button variant='outlined' color='inherit'>
-                    Join
+                    <Link to="/register">
+                      Join
+                    </Link>
                   </Button>
                 </Box>
               }

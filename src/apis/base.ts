@@ -7,9 +7,12 @@ const api = axios.create({
 api.interceptors.request.use((config: any) => {
   const userLocal = localStorage.getItem("user");
   const currentUSer = userLocal ? JSON.parse(userLocal) : null;
+  const userToken = localStorage.getItem("userToken");
+  const currentUSerToken = JSON.parse(userToken!) ;
   config.headers = {
     ...config.headers,
     Authorization: currentUSer ? `Bearer ${currentUSer.accessToken}` : "",
+    token: currentUSerToken,
     tokenCybersoft:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA2MiIsIkhldEhhblN0cmluZyI6IjE3LzEwLzIwMjQiLCJIZXRIYW5UaW1lIjoiMTcyOTEyMzIwMDAwMCIsIm5iZiI6MTcwMDE1NDAwMCwiZXhwIjoxNzI5MjcwODAwfQ.xKQVYYnO9233wkXRw5oU4Dtx41flqDuUnA0DbkDYRmM",
   };

@@ -3,13 +3,27 @@ import { MagnifyingGlassIcon, ArrowLongLeftIcon, ArrowLongRightIcon } from '@her
 import { useState } from "react";
 import { useGetAllServices } from "~/hooks/job-hook";
 import { CongViecDuocThue } from "~/types/CongViecDuocThue";
+import AddServiceModal from './AddServiceModal';
 
 const PAGE_SIZE = 10;
 
 export default function ServiceList() {
-  const { data: services, isLoading } = useGetAllServices();
+  const { data: services, isLoading, refetch } = useGetAllServices();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isAddServiceModalOpen, setIsAddServiceModalOpen] = useState(false);
+  // * add admin operation
+  const openAddServiceModal = () => {
+    setIsAddServiceModalOpen(true);
+  };
+
+  const closeAddServiceModal = () => {
+    setIsAddServiceModalOpen(false);
+  };
+  const handleAddService = () => {
+    closeAddServiceModal();
+    refetch();
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -39,9 +53,10 @@ export default function ServiceList() {
         <div className="sm:mt-0 sm:pt-4 sm:pb-2 lg:pt-6 lg:pb-4">
           <button
             type="button"
+            onClick={openAddServiceModal}
             className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
           >
-            Create new job
+            Create new Service
           </button>
         </div>
       </div>
@@ -105,7 +120,7 @@ export default function ServiceList() {
                           Finished
                         </span>}
                     </td>
-                    <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                    {/* <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <a href="#" className="text-indigo-600 hover:text-indigo-900">
                         <Cog6ToothIcon className="h-5 w-5" />
                       </a>
@@ -114,7 +129,7 @@ export default function ServiceList() {
                       <a href="#" className="text-red-600 hover:text-red-900">
                         <TrashIcon className="h-5 w-5" />
                       </a>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
 
@@ -159,6 +174,7 @@ export default function ServiceList() {
           </button>
         </div>
       </nav>
+      <AddServiceModal isOpen={isAddServiceModalOpen} onClose={closeAddServiceModal} onAddService={handleAddService} />
     </div>
 
   )

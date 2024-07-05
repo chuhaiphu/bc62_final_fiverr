@@ -13,7 +13,6 @@ export default function HeaderListJobTypeJob() {
     const [selectedJobId, setSelectedJobId] = useState(1);
     const navigate = useNavigate();
     const { data, isLoading, error } = useListJob();
-
     if (isLoading) {
         return <div>Loading data...</div>
     }
@@ -70,6 +69,7 @@ console.log('object',selectedJobId)
                     {data &&
                         data.map((dataItem) => (
                             <Link
+                                id="phu"
                                 onClick={() => handleJobClick(dataItem.id!)}
                                 className={styles.item}
                                 key={dataItem.id}

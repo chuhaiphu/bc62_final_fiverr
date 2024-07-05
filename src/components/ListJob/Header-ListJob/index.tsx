@@ -7,11 +7,12 @@ import { useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Switch from '@mui/material/Switch';
 import ListJobDetail from '../ListJobDetail';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function HeaderListJob() {
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
-    
+    const navigate = useNavigate();
     const [selectedJobDetailId, setSelectedJobDetailId] = useState(-1);
     const [selectedJobId, setSelectedJobId] = useState(-1);
 
@@ -62,7 +63,15 @@ export default function HeaderListJob() {
                         <Link className={styles.item}>Messages</Link>
                         <Link className={styles.item}>Lists</Link>
                         <Link className={styles.item}>Orders</Link>
-                        <Link className={styles.logo}>K</Link>
+                        <Link 
+                        className={styles.logo}
+                        onClick={() => {
+                            localStorage.removeItem('userToken');
+                            navigate('/login');
+                          }} 
+                        >
+                            K
+                        </Link>
                     </Box>
                 </Box>
             </Container>

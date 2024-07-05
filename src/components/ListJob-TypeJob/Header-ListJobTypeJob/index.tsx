@@ -5,13 +5,14 @@ import { useState } from 'react';
 import { useListJob } from '~/hooks/listJob-typejob-hook';
 import Jobdetail from '../../ListJob/Jobdetail/ListJobdetail';
 import CourseClassificationCarousel from '../CourseClassification-carosel';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function HeaderListJobTypeJob() {
     const [selectedJobId, setSelectedJobId] = useState(1);
-
-    const { data, isLoading, error } = useListJob()
+    const navigate = useNavigate();
+    const { data, isLoading, error } = useListJob();
 
     if (isLoading) {
         return <div>Loading data...</div>
@@ -24,7 +25,7 @@ export default function HeaderListJobTypeJob() {
     const handleJobClick = (jobId: number) => {
         setSelectedJobId(jobId);
     };
-
+console.log('object',selectedJobId)
     return (
         <>
             <Container>
@@ -54,7 +55,12 @@ export default function HeaderListJobTypeJob() {
                         <Link className={styles.item}>Messages</Link>
                         <Link className={styles.item}>Lists</Link>
                         <Link className={styles.item}>Orders</Link>
-                        <Link className={styles.logo}>K</Link>
+                        <Link className={styles.logo}
+                        onClick={() => {
+                            localStorage.removeItem('userToken');
+                            navigate('/login');
+                          }} 
+                        >K</Link>
                     </Box>
                 </Box>
             </Container>

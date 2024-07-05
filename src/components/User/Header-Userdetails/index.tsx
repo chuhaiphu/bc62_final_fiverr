@@ -2,13 +2,14 @@ import { Box, Button, Container, Input, Link } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './Header-Userdetail.module.scss';
 import { useListJob } from '~/hooks/listJob-typejob-hook';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 export default function HeaderUserDetails() {
     
-
+    const navigate = useNavigate();
     const { data, isLoading, error } = useListJob()
 
     if (isLoading) {
@@ -17,12 +18,7 @@ export default function HeaderUserDetails() {
 
     if (error) {
         return <div>Error loading data: {error.message}</div>
-    };
-
-
-   
-
-   
+    };  
 
     return (
         <>
@@ -53,7 +49,13 @@ export default function HeaderUserDetails() {
                         <Link className={styles.item}>Messages</Link>
                         <Link className={styles.item}>Lists</Link>
                         <Link className={styles.item}>Orders</Link>
-                        <Link className={styles.logo}>K</Link>
+                        <Link 
+                        className={styles.logo}
+                        onClick={() => {
+                            localStorage.removeItem('userToken');
+                            navigate('/login');
+                          }} 
+                        >K</Link>
                     </Box>
                 </Box>
             </Container>

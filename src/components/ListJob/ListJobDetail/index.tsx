@@ -28,7 +28,7 @@ export default function ListJobDetail({ props }: any) {
     return (
         <Container className={styles.listJobDetail}>
 
-            {id && <ListJobSearch tenCV={id} />}
+            {id && props == '-1' && <ListJobSearch tenCV={id} />}
 
             {props && 
                 <>

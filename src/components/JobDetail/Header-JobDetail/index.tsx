@@ -6,12 +6,13 @@ import Dropdown from '~/components/ListJob/dropdown';
 import { useState } from 'react';
 import JobDetails from '../JobDetails';
 import AddComment from '../Add-Comment';
+import { useNavigate } from 'react-router-dom';
 
 export default function HeaderJobDetail() {
 
     const [selectedJobDetailId, setSelectedJobDetailId] = useState(2);
     const [selectedJobId, setSelectedJobId] = useState(-1);
-
+    const navigate = useNavigate();
     const { data, isLoading, error } = useListJob()
 
     if (isLoading) {
@@ -62,7 +63,15 @@ export default function HeaderJobDetail() {
                         <Link className={styles.item}>Messages</Link>
                         <Link className={styles.item}>Lists</Link>
                         <Link className={styles.item}>Orders</Link>
-                        <Link className={styles.logo}>K</Link>
+                        <Link 
+                        className={styles.logo}
+                        onClick={() => {
+                            localStorage.removeItem('userToken');
+                            navigate('/login');
+                          }}
+                        >
+                            K
+                        </Link>
                     </Box>
                 </Box>
             </Container>

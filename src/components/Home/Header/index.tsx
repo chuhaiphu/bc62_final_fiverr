@@ -12,13 +12,13 @@ import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded'
 import { useState } from 'react'
 import { useSearch } from '~/hooks/search-hook'
 import { useNavigate } from 'react-router-dom'
+import { useUserStore } from '~/store/user-store'
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  
+  const user = useUserStore((state) => state.user);
   const { data, isLoading, error } = useSearch(searchQuery)
-
   
   const handleSearch = () => {
     if (isLoading) {
@@ -34,6 +34,7 @@ export default function Header() {
     }
   };
  
+
   return (
     <>
       <CssBaseline />
@@ -46,15 +47,32 @@ export default function Header() {
             </Box>
             <Box>
               <Box className={styles.navBarRight}>
+              <Button onClick={() => navigate('/job-detail')}>Job Detail</Button>
+              <Button onClick={() => navigate('/list-job')}>List Job</Button>
+              <Button onClick={() => navigate('/list-job-&-type-job')}>List Job & Type Job</Button>
+              <Button onClick={() => navigate('/user-detail')}>User Detail</Button>
                 <Button>
                   Become a seller
                 </Button>
-                <Button>
-                  Sign In
-                </Button>
-                <Button variant='outlined' color='inherit'>
-                  Join
-                </Button>
+                {!user && (
+                  <>
+                    <Button onClick={() => navigate('/login')}>
+                      Sign In
+                    </Button>
+                    <Button onClick={() => navigate('/register')} variant='outlined' color='inherit'>
+                      Join
+                    </Button>
+                  </>
+                )}
+
+                {user && (
+                  <Button variant='outlined' 
+                  onClick={() => {
+                    localStorage.removeItem('userToken');
+                    navigate('/login');
+                  }} 
+                  >Log Out</Button>
+                )}
               </Box>
             </Box>
           </Box>

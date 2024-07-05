@@ -33,7 +33,6 @@ export default function Header() {
         navigate(`/list-job/${searchQuery}`)
     }
   };
- 
 
   return (
     <>
@@ -140,11 +139,11 @@ export default function Header() {
 
       </Container>
       <Box className={styles.trustedBy}>
-        <span style={{paddingBottom: '0.5vh', fontWeight: 'bold', color:'grey'}}>Trusted by:</span>
+        <span style={{ paddingBottom: '0.5vh', fontWeight: 'bold', color: 'grey' }}>Trusted by:</span>
         <span><img src={FacebookLogo} alt="" /></span>
         <span><img src={GoogleLogo} alt="" /></span>
-        <span style={{margin: '0 2vw'}}><img src={NetflixLogo} style={{width: '130%'}} alt="" /></span>
-        <span style={{margin: '0 4vw'}}><img src={PnGLogo} style={{width: '130%',}} alt="" /></span>
+        <span style={{ margin: '0 2vw' }}><img src={NetflixLogo} style={{ width: '130%' }} alt="" /></span>
+        <span style={{ margin: '0 4vw' }}><img src={PnGLogo} style={{ width: '130%', }} alt="" /></span>
         <span><img src={PaypalLogo} alt="" /></span>
       </Box>
     </>

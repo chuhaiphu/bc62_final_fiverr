@@ -49,10 +49,7 @@ export default function Header() {
               <Button onClick={() => navigate('/job-detail')}>Job Detail</Button>
               <Button onClick={() => navigate('/list-job')}>List Job</Button>
               <Button onClick={() => navigate('/list-job-&-type-job')}>List Job & Type Job</Button>
-              <Button onClick={() => navigate('/user-detail')}>User Detail</Button>
-                <Button>
-                  Become a seller
-                </Button>
+              <Button onClick={() => navigate('/user-detail')}>{user?.name}</Button>
                 {!user && (
                   <>
                     <Button onClick={() => navigate('/login')}>

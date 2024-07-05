@@ -7,15 +7,18 @@ import { useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Switch from '@mui/material/Switch';
 import ListJobDetail from '../ListJobDetail';
+import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '~/store/user-store';
+
 
 export default function HeaderListJob() {
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
-
+    const navigate = useNavigate();
     const [selectedJobDetailId, setSelectedJobDetailId] = useState(-1);
     const [selectedJobId, setSelectedJobId] = useState(-1);
 
     const { data, isLoading, error } = useListJob()
-
+    const user = useUserStore((state) => state.user);
     if (isLoading) {
         return <div>Loading data...</div>
     }
@@ -24,14 +27,11 @@ export default function HeaderListJob() {
         return <div>Error loading data: {error.message}</div>
     };
 
-
-    const handleJobIdFromDropdown = (jobId: number) => {
+    const handleJobIdFromDropdown = (jobId: any) => {
         setSelectedJobDetailId(jobId);
     };
 
-
-
-    const handleJobClick = (jobId: number) => {
+    const handleJobClick = (jobId: any) => {
         setSelectedJobId(jobId);
     };
 
@@ -64,7 +64,17 @@ export default function HeaderListJob() {
                         <Link className={styles.item}>Messages</Link>
                         <Link className={styles.item}>Lists</Link>
                         <Link className={styles.item}>Orders</Link>
-                        <Link className={styles.logo}>K</Link>
+                        {user ? (
+                            <Link 
+                                className={styles.logo}
+                                onClick={() => {
+                                    localStorage.removeItem('userToken');
+                                    navigate('/login');
+                                  }}
+                            >
+                                Log Out
+                            </Link>
+                        ) : <Link className={styles.logo} onClick={() => navigate('/login')}> Login  </Link>}
                     </Box>
                 </Box>
             </Container>

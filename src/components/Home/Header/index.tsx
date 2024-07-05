@@ -9,17 +9,28 @@ import PnGLogo from '~/assets/PnGLogo.png'
 import styles from './Header.module.scss'
 import SearchIcon from '@mui/icons-material/Search'
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded'
+import { useState } from 'react'
+import { useSearch } from '~/hooks/search-hook'
+import { useNavigate } from 'react-router-dom'
 import { useUserStore } from '~/store/user-store'
-import { Link } from 'react-router-dom'
 
 export default function Header() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
-  const removeUser = useUserStore((state) => state.removeUser);
-  const handleSignOut = async () => {
-    try {
-      removeUser();
-    } catch (error) {
-      console.error("Error signing out:", error);
+  const { data, isLoading, error } = useSearch(searchQuery)
+  
+  const handleSearch = () => {
+    if (isLoading) {
+      return <div>Loading data...</div>
+    }
+  
+    if (error) {
+      return <div>Error loading data: {error.message}</div>
+    }; 
+
+    if(data){
+        navigate(`/list-job/${searchQuery}`)
     }
   };
 
@@ -34,37 +45,34 @@ export default function Header() {
               <img src={FiverrLogo} alt="Fiverr Logo" className={styles.fiverrLogo} />
             </Box>
             <Box>
-              {user ?
-                <Box className={styles.navBarRight}>
-                  <Button>
-                    Welcome
-                  </Button>
-                  <Button>
-                    <Link to="/user/detail">
-                      {user.name}
-                    </Link>
-
-                  </Button>
-                  <Button variant='outlined' color='inherit' onClick={handleSignOut}>
-                    Sign out
-                  </Button>
-                </Box> :
-                <Box className={styles.navBarRight}>
-                  <Button>
-                    Become a seller
-                  </Button>
-                  <Button>
-                    <Link to="/login">
+              <Box className={styles.navBarRight}>
+              <Button onClick={() => navigate('/job-detail')}>Job Detail</Button>
+              <Button onClick={() => navigate('/list-job')}>List Job</Button>
+              <Button onClick={() => navigate('/list-job-&-type-job')}>List Job & Type Job</Button>
+              <Button onClick={() => navigate('/user-detail')}>User Detail</Button>
+                <Button>
+                  Become a seller
+                </Button>
+                {!user && (
+                  <>
+                    <Button onClick={() => navigate('/login')}>
                       Sign In
-                    </Link>
-                  </Button>
-                  <Button variant='outlined' color='inherit'>
-                    <Link to="/register">
+                    </Button>
+                    <Button onClick={() => navigate('/register')} variant='outlined' color='inherit'>
                       Join
-                    </Link>
-                  </Button>
-                </Box>
-              }
+                    </Button>
+                  </>
+                )}
+
+                {user && (
+                  <Button variant='outlined' 
+                  onClick={() => {
+                    localStorage.removeItem('userToken');
+                    navigate('/login');
+                  }} 
+                  >Log Out</Button>
+                )}
+              </Box>
             </Box>
           </Box>
           <Box className={styles.mainHeader}>
@@ -82,13 +90,14 @@ export default function Header() {
                   size='small'
                   fullWidth={true}
                   placeholder="Try everything - Shakira"
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   InputProps={{
                     startAdornment: <InputAdornment position="start"><SearchIcon></SearchIcon></InputAdornment>,
                     disableUnderline: true,
                     style: { paddingTop: '0.2vh', marginLeft: '1vw', height: '100%', display: 'flex', alignItems: 'center' }
                   }}
                 />
-                <Button className={styles.searchButton} variant="contained" disableElevation={true}>Search</Button>
+                <Button onClick={() => handleSearch()} className={styles.searchButton} variant="contained" disableElevation={true}>Search</Button>
               </Box>
               <Box className={styles.popularTag}>
                 <Typography variant='subtitle2' sx={{ fontWeight: 'bold', color: 'white' }}>

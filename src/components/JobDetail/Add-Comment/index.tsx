@@ -1,5 +1,6 @@
 import { Box, Button, Rating } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAddComment } from "~/hooks/addComment-hook";
 import { useCommentStore } from "~/store/comment-store";
 import { useUserStore } from "~/store/user-store";
@@ -10,8 +11,7 @@ export default function AddComment({ props }: any) {
     const commentElement = document.getElementById('comment') as HTMLTextAreaElement;
 
     const user = useUserStore((state) => state.user);
-    // const user = { avatar: 221, id: 1 }
-
+    const navigate = useNavigate();
     const [value, setValue] = useState<number | null>(5);
     const { mutate: addComment } = useAddComment(props);
     const refetchComments = useCommentStore((state) => state.refetchComments);
@@ -24,14 +24,13 @@ export default function AddComment({ props }: any) {
             saoBinhLuan: value!,
             maCongViec: props,
         };
-        console.log(dataComment);
 
         await addComment(dataComment);
         refetchComments();
         commentElement.value = '';
     }
     return (
-        (user !== null) ? (
+        user ? (
             <Box display='flex' flexDirection='column'>
                 <Box style={{ margin: '0 0 1vh 3vh', display: 'flex', alignItems: 'center' }}>
                     <p style={{ paddingTop: '2vh' }}>Đánh giá :</p>
@@ -52,7 +51,7 @@ export default function AddComment({ props }: any) {
             </Box>
         ) : (
             <Box >
-                <Button style={{ margin: '2vh 0 0 2vh' }} variant="contained">Login to Add Comment</Button>
+                <Button onClick={() => {navigate('/login')  }} style={{ margin: '2vh 0 0 2vh' }} variant="contained">Login to Add Comment</Button>
             </Box>
         )
     )

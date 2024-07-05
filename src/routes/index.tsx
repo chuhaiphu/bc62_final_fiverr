@@ -13,6 +13,7 @@ import JobTypeList from '~/pages/Admin/_Main/_List/JobTypes';
 import ListJobPage from '~/pages/ListJob';
 import UserDetailPage from '~/pages/UserDetail';
 import JobDetailPage from '~/pages/JobDetail';
+import ListJobTypeJobPage from '~/pages/ListJobTypeJob';
 
 // * for user
 const ProtectedRoute = () => {
@@ -58,10 +59,10 @@ const routes = [
   },
   {
     path: "list-job-&-type-job",
-    element: <CourseClassidicationPage/>,
+    element: <ListJobTypeJobPage/>,
   },
   {
-    path: "list-job",
+    path: "list-job/:id?",
     element: <ListJobPage/>,
   },
   {
@@ -77,10 +78,7 @@ const routes = [
         element: <ListJobPage />,
 
       },
-      {
-        path: '/user/course',
-        element: <CourseClassidicationPage />,
-      },
+
       {
         path: '/user/detail',
         element: <UserDetail />,

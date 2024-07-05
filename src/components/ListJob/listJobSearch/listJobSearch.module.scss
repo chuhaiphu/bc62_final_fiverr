@@ -1,0 +1,9 @@
+.listJobDetail{
+    display: flex!important;
+    justify-content: space-evenly;
+    .starting{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px ;
+    }
+}

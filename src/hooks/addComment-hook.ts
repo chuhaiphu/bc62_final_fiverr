@@ -7,7 +7,6 @@ export const useAddComment = (maCongViec: number) => {
   return useMutation({
     mutationFn: addCommentApi,
     onSuccess: () => {
-      // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ['get-comment', maCongViec] });
     },
   })

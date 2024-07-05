@@ -78,10 +78,7 @@ const routes = [
         element: <ListJobPage />,
 
       },
-      {
-        path: '/user/course',
-        element: <CourseClassidicationPage />,
-      },
+
       {
         path: '/user/detail',
         element: <UserDetail />,

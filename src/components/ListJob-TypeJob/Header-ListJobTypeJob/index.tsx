@@ -6,6 +6,7 @@ import { useListJob } from '~/hooks/listJob-typejob-hook';
 import Jobdetail from '../../ListJob/Jobdetail/ListJobdetail';
 import CourseClassificationCarousel from '../CourseClassification-carosel';
 import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '~/store/user-store';
 
 
 
@@ -13,6 +14,7 @@ export default function HeaderListJobTypeJob() {
     const [selectedJobId, setSelectedJobId] = useState(1);
     const navigate = useNavigate();
     const { data, isLoading, error } = useListJob();
+    const user = useUserStore((state) => state.user);
     if (isLoading) {
         return <div>Loading data...</div>
     }
@@ -54,12 +56,17 @@ console.log('object',selectedJobId)
                         <Link className={styles.item}>Messages</Link>
                         <Link className={styles.item}>Lists</Link>
                         <Link className={styles.item}>Orders</Link>
-                        <Link className={styles.logo}
-                        onClick={() => {
-                            localStorage.removeItem('userToken');
-                            navigate('/login');
-                          }} 
-                        >K</Link>
+                        {user ? (
+                            <Link 
+                                className={styles.logo}
+                                onClick={() => {
+                                    localStorage.removeItem('userToken');
+                                    navigate('/login');
+                                  }}
+                            >
+                                Log Out
+                            </Link>
+                        ) : <Link className={styles.logo} onClick={() => navigate('/login')}> Login  </Link>}
                     </Box>
                 </Box>
             </Container>

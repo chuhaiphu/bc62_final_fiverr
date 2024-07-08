@@ -1,4 +1,4 @@
-import Footer from "~/components/Footer";
+import Footer from "~/components/Home/Footer";
 import HeaderListJob from "~/components/ListJob/Header-ListJob";
 
 

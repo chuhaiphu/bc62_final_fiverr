@@ -1,12 +1,19 @@
-
 import styled from '@mui/system/styled';
 import Grid from '@mui/system/Unstable_Grid';
 import Box from '@mui/system/Box';
 import { Container, Link } from '@mui/material';
-import styles from './Category.module.scss';
+import styles from '~/components/Home/Category/Category.module.scss'
 import { Carousel } from 'antd';
 import React from 'react';
-
+import graphicsDesignIcon from '~/assets/graphics-design.png';
+import onlineMarketingIcon from '~/assets/online-marketing.png';
+import writingTranslationIcon from '~/assets/writing-translation.png';
+import videoAnimationIcon from '~/assets/video-animation.png';
+import musicAudioIcon from '~/assets/music-audio.png';
+import programmingIcon from '~/assets/programming.png';
+import businessIcon from '~/assets/business.png';
+import lifestyleIcon from '~/assets/lifestyle.png';
+import dataIcon from '~/assets/data.png';
 
 
 const Item = styled('div')(({ theme }) => ({
@@ -63,8 +70,6 @@ export default function Category() {
                         <Box className={styles.itemCarousel} >
                             <Box className={styles.itemLeft}>
                                 <iframe width="auto" height={355} src="https://www.youtube.com/embed/c-rOphE0sD4" title="Đỗ Kim Phúc đi nhận quà siêu xịn từ chung kết Champions League Real Madrid vs Dortmund" frameBorder={0} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-
-
                             </Box>
                             <Box className={styles.itemRight}>
                                 <Box className={styles.author}> Tim and Dan Joo, Co-Founders | <label className={styles.rooter}> Rooter</label> </Box>
@@ -81,7 +86,7 @@ export default function Category() {
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
-                                            <img src='./src/assets/graphics-design.png' alt="icon" />
+                                            <img src={graphicsDesignIcon} alt="icon" />
                                         </Box>
                                         {/* <Box className={styles.decorationIcon}></Box> */}
                                         <Box className={styles.text}>
@@ -94,7 +99,7 @@ export default function Category() {
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
-                                            <img src='./src/assets/online-marketing.png' alt="icon" />
+                                            <img src={onlineMarketingIcon} alt="icon" />
                                         </Box>
                                         <Box className={styles.text}>
                                             Digital Marketing
@@ -106,7 +111,7 @@ export default function Category() {
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
-                                            <img src='./src/assets/writing-translation.png' alt="icon" />
+                                            <img src={writingTranslationIcon} alt="icon" />
                                         </Box>
                                         <Box className={styles.text}>
                                             Writing & Translation
@@ -118,7 +123,7 @@ export default function Category() {
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
-                                            <img src='./src/assets/video-animation.png' alt="icon" />
+                                            <img src={videoAnimationIcon} alt="icon" />
                                         </Box>
                                         <Box className={styles.text}>
                                             Video & Animation
@@ -130,7 +135,7 @@ export default function Category() {
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
-                                            <img src='./src/assets/music-audio.png' alt="icon" />
+                                            <img src={musicAudioIcon} alt="icon" />
                                         </Box>
                                         <Box className={styles.text}>
                                             Music & Audio
@@ -142,7 +147,7 @@ export default function Category() {
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
-                                            <img src='./src/assets/programming.png' alt="icon" />
+                                            <img src={programmingIcon} alt="icon" />
                                         </Box>
                                         <Box className={styles.text}>
                                             Programming & Tech
@@ -154,7 +159,7 @@ export default function Category() {
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
-                                            <img src='./src/assets/business.png' alt="icon" />
+                                            <img src={businessIcon} alt="icon" />
                                         </Box>
                                         <Box className={styles.text}>
                                             Business
@@ -166,7 +171,7 @@ export default function Category() {
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
-                                            <img src='./src/assets/lifestyle.png' alt="icon" />
+                                            <img src={lifestyleIcon} alt="icon" />
                                         </Box>
                                         <Box className={styles.text}>
                                             Lifestyle
@@ -178,7 +183,7 @@ export default function Category() {
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
-                                            <img height={5} src='./src/assets/data.png' alt="icon" />
+                                            <img height={5} src={dataIcon} alt="icon" />
                                         </Box>
                                         <Box className={styles.text}>
                                             Data

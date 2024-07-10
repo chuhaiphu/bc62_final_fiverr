@@ -14,13 +14,13 @@ export default function ListJobdetail({ props }: any) {
     };
    
     return (
-        <Container>
+        <Container className={styles.containerCard}>
             {data.map((dataItem: any) => (
-                <>
+                <Box >
                     <h2 className={styles.h2}  key={dataItem.id}> Explore {dataItem.tenLoaiCongViec} </h2>
                     <Box className={styles.flex} >
                         {dataItem.dsNhomChiTietLoai.map((item: any) => (
-                            <Box>
+                            <Box className={styles.card}>
                                 <img className={styles.img} src={item.hinhAnh}></img>
                                 <h4 className={styles.h4}>{item.tenNhom}</h4>  
                                 {item.dsChiTietLoai.map((items: any) => (
@@ -29,7 +29,7 @@ export default function ListJobdetail({ props }: any) {
                             </Box>
                         ))}
                     </Box>
-                </>
+                </Box>
 
             ))}
 

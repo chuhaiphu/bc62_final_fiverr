@@ -31,3 +31,17 @@
         margin-top: 7vh;
     }
 }
+@media only screen and (max-width: 768px) {
+    .containerContent{
+        display: flex;
+        flex-direction: column;
+        .contentLeft{
+            width: 100%;
+        }
+        .contentRight{
+            width: 100%;
+            margin-top: 5vh;
+        }
+    }
+  }
+ 

@@ -32,6 +32,7 @@
     }
     .below{
         display: flex;
+        flex-wrap: wrap;
         .item{
             display: flex;
             align-items: center;
@@ -40,7 +41,8 @@
             border-radius: 10px;
             box-shadow: 2px 2px  rgb(211, 202, 202) ;
             margin-right: 2vh;
-            
+            margin-top: 2vh;
+            width: 23%;
             .logo{
                 width: 7vh;;
             }
@@ -52,4 +54,15 @@
         
     }
     
+}
+@media only screen and (max-width: 992px) {
+    .item{
+        margin-top: 2vh;
+        width: 39% !important;
+}}
+@media only screen and (max-width: 576px) {
+    .item{
+        margin-top: 2vh;
+        width: 100% !important;
+    }
 }

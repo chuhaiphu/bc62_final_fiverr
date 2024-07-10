@@ -4,7 +4,7 @@
     .content {
         display: flex;
         justify-content: space-between;
-
+        
         .contentLeft {
             width: 40%;
             display: flex;
@@ -152,7 +152,7 @@
                 position: relative;
                 margin-bottom: 3vh;
                 background-color: white;
-
+                flex-wrap: wrap;
                 .icon {
                     margin-right: 20px;
                 }
@@ -258,3 +258,18 @@
 
     }
 }
+@media only screen and (max-width: 768px) {
+    .content{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        .contentLeft{
+            width: 100%;
+        }
+        .contentRight{
+            .icon{
+                width: 20%;
+            }
+        }
+    }
+  }

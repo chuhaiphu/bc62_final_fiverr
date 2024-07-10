@@ -77,7 +77,7 @@ export default function Category() {
 
                     <Box sx={{ width: '100%' }}>
                         <Grid container className={styles.categories} rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                            <Grid xs={2}>
+                            <Grid  >
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
@@ -90,7 +90,7 @@ export default function Category() {
                                     </Link>
                                 </Item>
                             </Grid>
-                            <Grid xs={2}>
+                            <Grid >
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
@@ -102,7 +102,7 @@ export default function Category() {
                                     </Link>
                                 </Item>
                             </Grid>
-                            <Grid xs={2}>
+                            <Grid >
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
@@ -114,7 +114,7 @@ export default function Category() {
                                     </Link>
                                 </Item>
                             </Grid>
-                            <Grid xs={2}>
+                            <Grid >
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
@@ -126,7 +126,7 @@ export default function Category() {
                                     </Link>
                                 </Item>
                             </Grid>
-                            <Grid xs={2}>
+                            <Grid >
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
@@ -138,7 +138,7 @@ export default function Category() {
                                     </Link>
                                 </Item>
                             </Grid>
-                            <Grid xs={2}>
+                            <Grid >
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
@@ -150,7 +150,7 @@ export default function Category() {
                                     </Link>
                                 </Item>
                             </Grid>
-                            <Grid xs={2}>
+                            <Grid >
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
@@ -162,7 +162,7 @@ export default function Category() {
                                     </Link>
                                 </Item>
                             </Grid>
-                            <Grid xs={2}>
+                            <Grid >
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >
@@ -174,7 +174,7 @@ export default function Category() {
                                     </Link>
                                 </Item>
                             </Grid>
-                            <Grid xs={2}>
+                            <Grid >
                                 <Item className={styles.item}>
                                     <Link>
                                         <Box className={styles.icon} >

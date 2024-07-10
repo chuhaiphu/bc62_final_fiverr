@@ -8,10 +8,10 @@ import styles from './Footer.module.scss';
 export default function Footer() {
     return (
 
-        <Container disableGutters className={styles.footerContainer} maxWidth="xl">
+        <Container maxWidth="sm" disableGutters className={styles.footerContainer} maxWidth="xl">
             <Container maxWidth="lg">
-                <Box className={styles.navBar}>
-                    <Box>
+                <Box className={styles.navBar} >
+                    <Box className={styles.item}>
                         <h3>Categories</h3>
                         <Link>  Digital Marketing</Link>
                         <Link> Writing & Translation </Link>
@@ -23,7 +23,7 @@ export default function Footer() {
                         <Link>Lifestyle</Link>
                         <Link>Sitemap</Link>
                     </Box>
-                    <Box>
+                    <Box className={styles.item}>
                         <h3>About</h3>
                         <Link>Careers </Link>
                         <Link>Press & News </Link>
@@ -33,14 +33,14 @@ export default function Footer() {
                         <Link>Intellectual Property Claims </Link>
                         <Link>Investor Relations </Link>
                     </Box>
-                    <Box>
+                    <Box className={styles.item}>
                         <h3>Support</h3>
                         <Link>Help & Support</Link>
                         <Link>Trust & Safety</Link>
                         <Link>Selling in Fiverr</Link>
                         <Link>Buying om Fiverr</Link>
                     </Box>
-                    <Box>
+                    <Box className={styles.item} > 
                         <h3>Community</h3>
                         <Link>Event</Link>
                         <Link>Blog</Link>
@@ -55,7 +55,7 @@ export default function Footer() {
                             <p> Exclusuve Benefits</p>
                         </Link>
                     </Box>
-                    <Box>
+                    <Box className={styles.item}>
                         <h3>More From Fiverr</h3>
                         <Link>Fiverr Business</Link>
                         <Link>Fiverr Pro</Link>
@@ -78,7 +78,7 @@ export default function Footer() {
                     </Box>
                 </Box>
                 <div className={styles.horizontalLine}></div>
-                <Box className={styles.footer}>
+                <Box className={styles.footer} sx={{ display: { xs: 'block', sm: 'none' } }}>
                     <Box className={styles.footerLeft} >
                         <span className="logo_footer">
                             <svg width={91} height={27} viewBox="0 0 91 27" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -118,7 +118,8 @@ export default function Footer() {
                 </Box>
             </Container>
             <Box className={styles.endLine}></Box>
-        </Container>
+
+            </Container>
 
     )
 }

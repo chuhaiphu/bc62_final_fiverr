@@ -130,14 +130,15 @@
     border: 3px solid rgb(36, 38, 41);
     margin-bottom: 20px;
   }
-  :global{
-    .MuiLink-root{
+  :global {
+    .MuiLink-root {
       text-decoration: none !important;
       display: block !important;
-    } 
-    .MuiLink-root:hover{
-      text-decoration: underline !important;
-      cursor: pointer;
+      
+      &:hover {
+        text-decoration: underline !important;
+        cursor: pointer;
+      }
     }
   }
 }

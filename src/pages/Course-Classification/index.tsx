@@ -2,7 +2,7 @@
 import { Container } from "@mui/material";
 import CourseClassificationCarousel from "~/components/ListJob-TypeJob/CourseClassification-carosel";
 import CourseClassificationServicesRelated from "~/components/ListJob-TypeJob/CourseClassification-ServicesRelated";
-import Footer from "~/components/Footer";
+import Footer from "~/components/Home/Footer";
 import HeaderUserDetails from "~/components/User/Header-Userdetails";
 
 

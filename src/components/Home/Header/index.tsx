@@ -39,7 +39,7 @@ export default function Header() {
       <CssBaseline />
       <Container className={styles.headerContainer} maxWidth={false}>
 
-        <Container maxWidth="lg">
+        <Container >
           <Box className={styles.navBar}>
             <Box className={styles.navBarLeft}>
               <img src={FiverrLogo} alt="Fiverr Logo" className={styles.fiverrLogo} />
@@ -76,7 +76,7 @@ export default function Header() {
 
             <Box className={styles.mainHeaderLeft}>
               <Box className={styles.slogan}>
-                <Typography variant='h3' sx={{ fontWeight: 'bold', color: 'white' }}>
+                <Typography className={styles.h3} variant='h3' sx={{ fontWeight: 'bold', color: 'white' }}>
                   Find the perfect <span style={{ fontFamily: 'cursive', fontStyle: 'italic' }}>freelance</span> service for your business
                 </Typography>
               </Box>

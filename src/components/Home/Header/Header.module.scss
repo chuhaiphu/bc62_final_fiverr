@@ -107,3 +107,43 @@
         }
     }
 }
+@media only screen and (max-width: 992px) {
+
+  }
+  @media only screen and (max-width: 768px) {
+    .navBar{
+        display: flex;
+        flex-direction: column;
+        .navBarRight{
+            Button{
+            font-size: 15px !important;
+        }
+      }
+    }
+    .mainHeaderLeft{
+        .slogan h3 {
+            font-size: 30px !important;
+        }
+    }
+    
+    }
+  @media only screen and (max-width: 576px) {
+    .navBar{
+        display: flex;
+        flex-direction: column;
+        .navBarRight{
+            display: flex;
+            flex-direction: column;
+            Button{
+            font-size: 10px !important;
+            
+        }
+      }
+    }
+    .mainHeaderLeft{
+        .slogan h3 {
+            font-size: 20px !important;
+            width: 100%;
+        }
+    }
+  } 

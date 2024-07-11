@@ -26,21 +26,23 @@ export default function ListJobDetail({ props }: any) {
     };
 
     return (
-        <Container className={styles.listJobDetail}>
+        <Container >
 
             {id && props == '-1' && <ListJobSearch tenCV={id} />}
 
             {props && 
                 <>
                     <ListJobSearch tenCV={'-1'} />
-
+                    <Box className={styles.listJobDetail}>
                     {data &&
                         data.map((dataItem: any) => (
-                            <Card sx={{ maxWidth: 345 }}>
+                            
+                            <Card className={styles.cardItem}>
                                 <CardMedia
                                     sx={{ height: 200, width: 300 }}
                                     image={dataItem.congViec.hinhAnh}
                                     title="green iguana"
+                                    className={styles.img}
                                 />
                                 <Box display="flex" alignItems="center"  >
                                     <Avatar style={{ marginRight: '10px' }} alt="User Name" src={dataItem.avatar} />
@@ -60,7 +62,9 @@ export default function ListJobDetail({ props }: any) {
                                     </Typography>
                                 </CardContent>
                             </Card>
+                           
                         ))}
+                        </Box> 
                 </>
             }
         </Container>

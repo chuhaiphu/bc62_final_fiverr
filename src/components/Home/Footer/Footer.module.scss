@@ -143,3 +143,29 @@
   }
 }
 
+@media only screen and (max-width: 992px) {
+  .navBar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+  }
+  .item{
+    width: 33%;
+    display: block;
+   }
+}
+@media only screen and (max-width: 768px) {
+  .item{
+    width: 50%;
+    display: block;
+   }
+}
+@media only screen and (max-width: 576px) {
+  .navBar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+}

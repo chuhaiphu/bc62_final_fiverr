@@ -2,6 +2,7 @@ import { EnvelopeIcon, ShieldCheckIcon, ShieldExclamationIcon, UserCircleIcon, X
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAddAdmin } from '~/hooks/user-hook';
 import Swal from 'sweetalert2';
+import { useState } from 'react';
 
 type FormFields = {
   id: number;
@@ -43,6 +44,7 @@ export default function AddAdminModal({ isOpen, onClose, onAddAdmin }: AddAdminM
       text: error.content + ' Please try again later.',
     });
   };
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   const { mutate: signUp } = useAddAdmin(onSuccess, onError);
   const { register, handleSubmit, watch, formState: { errors } } = useForm<FormFields>()
@@ -148,9 +150,14 @@ export default function AddAdminModal({ isOpen, onClose, onAddAdmin }: AddAdminM
                 name="confirmPassword"
                 id="confirm-password"
                 className="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                onChange={(e) => {
+                  const confirmPassword = e.target.value;
+                  const password = watch('password');
+                  setPasswordsMatch(confirmPassword === password);
+                }}
               />
             </div>
-            {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>}
+            {!passwordsMatch && <p className="text-sm text-red-500">Passwords do not match</p>}
           </div>
 
           <div className="mt-5 flex justify-evenly">

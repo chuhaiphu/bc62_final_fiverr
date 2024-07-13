@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { User } from '~/types/User.type';
 import { useSkills } from '~/hooks/skill-hook';
 import { useInputState } from '~/hooks/utils';
+import { useState } from 'react';
 
 type FormFields = {
   id: number;
@@ -54,6 +55,7 @@ export default function UpdateUserModal({ isOpen, onClose, onUpdateUser, selecti
       text: error.content + ' Please try again later.',
     });
   };
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   const { mutate: updateUser } = useUpdateUser(onSuccess, onError);
   const { register, handleSubmit, watch, formState: { errors } } = useForm<FormFields>()
@@ -163,9 +165,14 @@ export default function UpdateUserModal({ isOpen, onClose, onUpdateUser, selecti
                 name="confirmPassword"
                 id="confirm-password"
                 className="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                onChange={(e) => {
+                  const confirmPassword = e.target.value;
+                  const password = watch('password');
+                  setPasswordsMatch(confirmPassword === password);
+                }}
               />
             </div>
-            {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>}
+            {!passwordsMatch && <p className="text-sm text-red-500">Passwords do not match</p>}
           </div>
 
           <div className='flex'>

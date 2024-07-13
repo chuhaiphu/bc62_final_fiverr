@@ -1,7 +1,9 @@
  
 
-import { Box, Container, Link } from '@mui/material';
-import styles from './Footer.module.scss';
+import Box from '@mui/material/Box/Box'
+import Container from '@mui/material/Container/Container'
+import Link from '@mui/material/Link/Link'
+import styles from '~/components/Home/Footer/Footer.module.scss'
 
 
 

@@ -11,11 +11,13 @@ import { useUserStore } from '~/store/user-store';
 
 export default function HeaderJobDetail() {
 
-    const [selectedJobDetailId, setSelectedJobDetailId] = useState(2);
+    const [selectedJobDetailId, setSelectedJobDetailId] = useState(-1);
     const [selectedJobId, setSelectedJobId] = useState(-1);
     const navigate = useNavigate();
     const { data, isLoading, error } = useListJob()
     const user = useUserStore((state) => state.user);
+
+
     if (isLoading) {
         return <div>Loading data...</div>
     }
@@ -91,7 +93,10 @@ export default function HeaderJobDetail() {
                                 >
                                     {dataItem.tenLoaiCongViec}
                                     <Box className={styles.dropdowncontent}>
-                                        <Dropdown onSendData={(jobId:number) => handleJobIdFromDropdown(jobId)} renderDropdown={selectedJobId} />
+                                        <Dropdown 
+                                        onSendData={(jobId:number) => handleJobIdFromDropdown(jobId)} 
+                                        renderDropdown={selectedJobId} 
+                                        />
                                     </Box>
                                 </Link>
 

@@ -141,7 +141,18 @@
     }
   }
 }
-
+@media only screen and (min-width: 992px) {
+  .navBar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .item{
+    width:  20%;
+    display: block;
+   }
+}
 @media only screen and (max-width: 992px) {
   .navBar {
     display: flex;

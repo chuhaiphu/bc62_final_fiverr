@@ -8,13 +8,13 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ListJobSearch from "../listJobSearch";
 
 export default function ListJobDetail({ props }: any) {
 
     const { id } = useParams();
-
+    const navigate = useNavigate();
     const { data, isLoading, error } = uselistjobdetail(props)
 
     if (isLoading) {
@@ -37,7 +37,7 @@ export default function ListJobDetail({ props }: any) {
                     {data &&
                         data.map((dataItem: any) => (
                             
-                            <Card className={styles.cardItem}>
+                            <Card onClick={() => navigate('/job-detail')} className={styles.cardItem}>
                                 <CardMedia
                                     sx={{ height: 200, width: 300 }}
                                     image={dataItem.congViec.hinhAnh}

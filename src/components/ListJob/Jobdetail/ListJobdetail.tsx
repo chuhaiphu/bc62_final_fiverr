@@ -1,9 +1,7 @@
 import { Box, Container } from "@mui/material"
 import { uselistjobtypejobdetail } from "~/hooks/listJob-typejob-hook"
 import styles from './Jobdetail.module.scss'
-
 export default function ListJobdetail({ props }: any) {
-   
     const { data, isLoading, error } = uselistjobtypejobdetail(props)
     if (isLoading) {
         return <div>Loading data...</div>

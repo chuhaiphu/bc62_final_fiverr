@@ -66,7 +66,7 @@ const routes = [
     element: <ListJobPage/>,
   },
   {
-    path: "job-detail",
+    path: "job-detail/:id?",
     element: <JobDetailPage/>,
   },
   {

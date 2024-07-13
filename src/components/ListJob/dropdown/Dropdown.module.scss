@@ -24,3 +24,15 @@
         }
     }
 }
+@media only screen and (max-width: 992px) {
+    .flex{
+        flex-direction: column !important;
+        width: 50vw!important;
+        .flexColumn{
+        flex-direction:row !important;
+        
+    }
+    
+}
+  }
+ 

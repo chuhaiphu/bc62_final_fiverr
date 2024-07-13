@@ -7,13 +7,14 @@ import Comment from "../Get-Comment";
 import ButtonHireJob from "../Button-HireJob";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { Fragment } from "react/jsx-runtime";
-
+import { useParams } from "react-router-dom";
 export default function JobDetails({ props }: any) {
 
-  const { data, isLoading, error } = usejobdetail(props)
+  const { id } = useParams()
+  const { data, isLoading, error } = usejobdetail(props > 0 ? props : id)
 
   if (isLoading) {
-    return <div>Loading data...</div>
+    return <div>Loading data...</div> 
   }
 
   if (error) {
@@ -80,7 +81,7 @@ export default function JobDetails({ props }: any) {
                 <img style={{ width: '100%', margin: '40px 0' }} src={dataItem.congViec.hinhAnh} />
               </Box>
               <Box>
-        {renderFormattedContent(dataItem.congViec.moTa)}
+                {renderFormattedContent(dataItem.congViec.moTa)}
               </Box>
               <Box className={styles.seller}>
                 <h3>About The Seller</h3>
@@ -114,7 +115,7 @@ export default function JobDetails({ props }: any) {
             </>
           ))}
         <FAQ />
-        <Comment props={props} />
+        <Comment props={props > 0 ? props : id} />
       </Box>
       <Box className={styles.contentRight}>
         <Box className={styles.boxAbove}>

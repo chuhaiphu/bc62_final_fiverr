@@ -1,4 +1,4 @@
-
+ 
 
 import Box from '@mui/material/Box/Box'
 import Container from '@mui/material/Container/Container'
@@ -10,7 +10,7 @@ import styles from '~/components/Home/Footer/Footer.module.scss'
 export default function Footer() {
     return (
 
-        <Container maxWidth="sm" disableGutters className={styles.footerContainer} maxWidth="xl">
+        <Container disableGutters className={styles.footerContainer} >
             <Container maxWidth="lg">
                 <Box className={styles.navBar} >
                     <Box className={styles.item}>

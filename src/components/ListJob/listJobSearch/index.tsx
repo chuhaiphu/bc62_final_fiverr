@@ -8,12 +8,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Avatar from '@mui/material/Avatar';
 import { uselistjobsearch } from "~/hooks/listJobSearch-hook";
 import styles from './listJobSearch.module.scss';
+import { useNavigate } from "react-router-dom";
 
 
 export default function ListJobSearch(props: any) {
     const formattedText = props.tenCV.replace(/ /g, '%20');
     const { data, isLoading, error } = uselistjobsearch(formattedText)
-
+    const navigate = useNavigate();
     if (isLoading) {
         return <div>Loading data...</div>
     }
@@ -23,14 +24,15 @@ export default function ListJobSearch(props: any) {
     };
     
   return (
-    <>
+    <Box className={styles.listJobDetail}>
       {data &&
                 data.map((dataItem: any) => (
-                    <Card sx={{ maxWidth: 300 }}>
+                    <Card onClick={() => navigate(`/job-detail/${dataItem.id}`)} className={styles.cardItem}>
                         <CardMedia
                             sx={{ height: 200, width: 300 }}
                             image={dataItem.congViec.hinhAnh}
                             title="green iguana"
+                            className={styles.img}
                         />
                         <Box display="flex" alignItems="center"  >
                             <Avatar style={{ marginRight: '10px' }} alt="User Name" src={dataItem.avatar} />
@@ -51,6 +53,6 @@ export default function ListJobSearch(props: any) {
                         </CardContent>
                     </Card>
                 ))}
-    </>
+    </Box>
   )
 }

@@ -2,13 +2,13 @@ import { Avatar, Box, Container, Rating, Typography } from "@mui/material"
 import styles from "./Comment.module.scss"
 import { useGetComment } from "~/hooks/getComment-hook"
 import { useCommentStore } from "~/store/comment-store"
-import { useEffect } from "react"
+import { useEffect, useState  } from "react"
 
 
 export default function Comment({ props }: any) {
     const { data, isLoading, refetch, error } = useGetComment(props);
     const setRefetchComments = useCommentStore((state) => state.setRefetchComments);
-
+    
     useEffect(() => {
         setRefetchComments(() => refetch);
     }, [refetch, setRefetchComments]);

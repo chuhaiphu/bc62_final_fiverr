@@ -3,7 +3,7 @@ import { useDropdown } from "~/hooks/dropDown-hook"
 import styles from './Dropdown.module.scss'
 
 
-export default function Dropdown({ renderDropdown, onSendData}: any) {
+export default function Dropdowns({ renderDropdown, onSendData}: any) {
 
   const { data, isLoading, error } = useDropdown(renderDropdown)
 

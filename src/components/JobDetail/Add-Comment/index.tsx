@@ -15,12 +15,16 @@ export default function AddComment({ props }: any) {
     const [value, setValue] = useState<number | null>(5);
     const { mutate: addComment } = useAddComment(props);
     const refetchComments = useCommentStore((state) => state.refetchComments);
+    const currentDate = new Date();
 
+const day = currentDate.getDate();     // Lấy ngày hiện tại (1-31)
+const month = currentDate.getMonth() + 1; // Lấy tháng hiện tại (0-11, cần cộng thêm 1)
+const year = currentDate.getFullYear(); // Lấy năm hiện tại (4 chữ số)
     const handleComment = async () => {
         const dataComment = {
             maNguoiBinhLuan: user?.id!,
             noiDung: (document.getElementById('comment') as HTMLInputElement)?.value ?? '',
-            ngayBinhLuan: new Date().toLocaleDateString(),
+            ngayBinhLuan: `${day}/${month}/${year}`,
             saoBinhLuan: value!,
             maCongViec: props,
         };

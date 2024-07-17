@@ -6,9 +6,17 @@ import { useEffect, useState  } from "react"
 
 
 export default function Comment({ props }: any) {
+    interface Comment {
+        id: number;
+        avatar: any;
+        tenNguoiBinhLuan: any;
+        saoBinhLuan: any; 
+        noiDung:any;
+        ngayBinhLuan:any
+      }
+      const [showAll, setShowAll] = useState(false);
     const { data, isLoading, refetch, error } = useGetComment(props);
     const setRefetchComments = useCommentStore((state) => state.setRefetchComments);
-    
     useEffect(() => {
         setRefetchComments(() => refetch);
     }, [refetch, setRefetchComments]);
@@ -20,10 +28,20 @@ export default function Comment({ props }: any) {
     if (error) {
         return <div>Error loading data: {error.message}</div>;
     }
+    const sortedComments = data.slice().sort((a: Comment, b: Comment) => {
+        const dateA = new Date(a.ngayBinhLuan.split('/').reverse().join('/'));
+        const dateB = new Date(b.ngayBinhLuan.split('/').reverse().join('/'));
+        return dateB.getTime() - dateA.getTime();
+      });
 
+      
+    const toggleShowAll = () => {
+        setShowAll(prev => !prev);
+      };
+      const commentsToShow = showAll ? sortedComments : sortedComments.slice(0, 3);
     return (
         < >
-            {data && data.map((dataItem: any) => (
+            {data && commentsToShow.map((dataItem: any) => (
                 <Box key={dataItem.id} style={{ marginBottom: '2vh' }}>
                     <Box style={{ display: 'flex', alignItems: 'center' }}>
                         <Avatar src={dataItem.avatar} />
@@ -42,6 +60,9 @@ export default function Comment({ props }: any) {
                     </Box>
                 </Box>
             ))}
+            {!showAll && (
+        <button onClick={toggleShowAll}>Show more</button>
+      )}
         </>
     )
 }

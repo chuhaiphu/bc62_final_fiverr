@@ -1,4 +1,4 @@
-import { Box, Button, Container, InputAdornment, TextField, Typography } from '@mui/material'
+import { Avatar,Box, Button, Container, InputAdornment, TextField, Typography, Link  } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 import FiverrLogo from '~/assets/Fiverr Logo.png'
 import FacebookLogo from '~/assets/FacebookLogo.png'
@@ -11,15 +11,39 @@ import SearchIcon from '@mui/icons-material/Search'
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded'
 import { useState } from 'react'
 import { useSearch } from '~/hooks/search-hook'
-import { useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import { useUserStore } from '~/store/user-store'
-
+import { Dropdown, Space } from 'antd'
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
   const { data, isLoading, error } = useSearch(searchQuery)
-  
+  const items = [
+    {
+        key: '1',
+        label: (
+            user ? (
+                <a target="_blank" rel="noopener noreferrer" onClick={() => {
+                    localStorage.removeItem('user');
+                    navigate('/login');
+                }} >
+                    Log-out
+                </a>
+            ) : (
+                <Link className={styles.logo} onClick={() => navigate('/login')}> Login  </Link>
+            )
+        ),
+    },
+    {
+        key: '2',
+        label: (
+            <a target="_blank" rel="noopener noreferrer" onClick={() => navigate('/user-detail')}>
+                Setting
+            </a>
+        ),
+    },
+];
   const handleSearch = () => {
     if (isLoading) {
       return <div>Loading data...</div>
@@ -62,12 +86,21 @@ export default function Header() {
                 )}
 
                 {user && (
-                  <Button variant='outlined' 
-                  onClick={() => {
-                    localStorage.removeItem('userToken');
-                    navigate('/login');
-                  }} 
-                  >Log Out</Button>
+                  <Space direction="vertical">
+                  <Space wrap>
+
+                      <Dropdown
+                          menu={{
+                              items,
+                          }}
+                          placement="top"
+                          arrow
+                          
+                      >
+                          <Avatar sx={{ width: 60, height: 60 }} />
+                      </Dropdown>
+                  </Space>
+              </Space>
                 )}
               </Box>
             </Box>

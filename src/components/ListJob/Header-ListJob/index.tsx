@@ -1,15 +1,15 @@
-import { Box, Button, Container, Input, Link } from '@mui/material';
+import { Avatar, Box, Button, Container, Input, Link } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './Header-Userdetail.module.scss';
 import { useListJob } from '~/hooks/listJob-typejob-hook';
-import Dropdown from '../dropdown';
+import Dropdowns from '../dropdown';
 import { useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Switch from '@mui/material/Switch';
 import ListJobDetail from '../ListJobDetail';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '~/store/user-store';
-
+import { Dropdown, Space } from 'antd'
 
 export default function HeaderListJob() {
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
@@ -19,6 +19,31 @@ export default function HeaderListJob() {
 
     const { data, isLoading, error } = useListJob()
     const user = useUserStore((state) => state.user);
+    const items = [
+        {
+            key: '1',
+            label: (
+                user ? (
+                    <a target="_blank" rel="noopener noreferrer" onClick={() => {
+                        localStorage.removeItem('user');
+                        navigate('/login');
+                    }} >
+                        Log-out
+                    </a>
+                ) : (
+                    <Link className={styles.logo} onClick={() => navigate('/login')}> Login  </Link>
+                )
+            ),
+        },
+        {
+            key: '2',
+            label: (
+                <a target="_blank" rel="noopener noreferrer" onClick={() => navigate('/user-detail')}>
+                    Setting
+                </a>
+            ),
+        },
+    ];
     if (isLoading) {
         return <div>Loading data...</div>
     }
@@ -41,7 +66,7 @@ export default function HeaderListJob() {
                 <Box className={styles.headerAbove}>
                     <Box className={styles.left}>
                         <Box className={styles.logo}>
-                            <span>
+                            <span onClick={() => navigate('/')}>
                                 <svg width={91} height={27} viewBox="0 0 91 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g fill="#000000">
                                         <path d="m82.9 13.1h-3.2c-2.1 0-3.2 1.5-3.2 4.1v9.3h-6.1v-13.4h-2.6c-2.1 0-3.2 1.5-3.2 4.1v9.3h-6.1v-18.4h6.1v2.8c1-2.2 2.4-2.8 4.4-2.8h7.4v2.8c1-2.2 2.4-2.8 4.4-2.8h2v5zm-25.6 5.6h-12.6c.3 2.1 1.6 3.2 3.8 3.2 1.6 0 2.8-.7 3.1-1.8l5.4 1.5c-1.3 3.2-4.6 5.1-8.5 5.1-6.6 0-9.6-5.1-9.6-9.5 0-4.3 2.6-9.4 9.2-9.4 7 0 9.3 5.2 9.3 9.1 0 .9 0 1.4-.1 1.8zm-5.9-3.5c-.1-1.6-1.3-3-3.3-3-1.9 0-3.1.8-3.4 3zm-23.1 11.3h5.3l6.7-18.3h-6.1l-3.2 10.7-3.4-10.8h-6.1zm-24.9 0h6v-13.4h5.7v13.4h6v-18.4h-11.6v-1.1c0-1.2.9-2 2.3-2h3.5v-5h-4.4c-4.5 0-7.5 2.7-7.5 6.6v1.5h-3.4v5h3.4z" />
@@ -64,17 +89,21 @@ export default function HeaderListJob() {
                         <Link className={styles.item}>Messages</Link>
                         <Link className={styles.item}>Lists</Link>
                         <Link className={styles.item}>Orders</Link>
-                        {user ? (
-                            <Link 
-                                className={styles.logo}
-                                onClick={() => {
-                                    localStorage.removeItem('userToken');
-                                    navigate('/login');
-                                  }}
-                            >
-                                Log Out
-                            </Link>
-                        ) : <Link className={styles.logo} onClick={() => navigate('/login')}> Login  </Link>}
+                        <Space direction="vertical">
+                            <Space wrap>
+
+                                <Dropdown
+                                    menu={{
+                                        items,
+                                    }}
+                                    placement="top"
+                                    arrow
+                                    
+                                >
+                                    <Avatar sx={{ width: 40, height: 40 }} />
+                                </Dropdown>
+                            </Space>
+                        </Space>
                     </Box>
                 </Box>
             </Container>
@@ -90,7 +119,7 @@ export default function HeaderListJob() {
                                 >
                                     {dataItem.tenLoaiCongViec}
                                     <Box className={styles.dropdowncontent}>
-                                        <Dropdown onSendData={(jobId:number) => handleJobIdFromDropdown(jobId)} renderDropdown={selectedJobId} />
+                                        <Dropdowns onSendData={(jobId:number) => handleJobIdFromDropdown(jobId)} renderDropdown={selectedJobId} />
                                     </Box>
                                 </Link>
 

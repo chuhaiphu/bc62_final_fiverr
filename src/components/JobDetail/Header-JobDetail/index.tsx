@@ -1,14 +1,14 @@
-import { Box, Button, Container, Input, Link } from '@mui/material';
+import { Avatar,Box, Button, Container, Input, Link } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './HeaderJobDetail.module.scss';
 import { useListJob } from '~/hooks/listJob-typejob-hook';
-import Dropdown from '~/components/ListJob/dropdown';
+import Dropdowns from '~/components/ListJob/dropdown';
 import { useState } from 'react';
 import JobDetails from '../JobDetails';
 import AddComment from '../Add-Comment';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '~/store/user-store';
-
+import { Dropdown, Space } from 'antd'
 export default function HeaderJobDetail() {
 
     const [selectedJobDetailId, setSelectedJobDetailId] = useState(-1);
@@ -16,7 +16,31 @@ export default function HeaderJobDetail() {
     const navigate = useNavigate();
     const { data, isLoading, error } = useListJob()
     const user = useUserStore((state) => state.user);
-
+    const items = [
+        {
+            key: '1',
+            label: (
+                user ? (
+                    <a target="_blank" rel="noopener noreferrer" onClick={() => {
+                        localStorage.removeItem('user');
+                        navigate('/login');
+                    }} >
+                        Log-out
+                    </a>
+                ) : (
+                    <Link className={styles.logo} onClick={() => navigate('/login')}> Login  </Link>
+                )
+            ),
+        },
+        {
+            key: '2',
+            label: (
+                <a target="_blank" rel="noopener noreferrer" onClick={() => navigate('/user-detail')}>
+                    Setting
+                </a>
+            ),
+        },
+    ];
 
     if (isLoading) {
         return <div>Loading data...</div>
@@ -66,17 +90,21 @@ export default function HeaderJobDetail() {
                         <Link className={styles.item}>Messages</Link>
                         <Link className={styles.item}>Lists</Link>
                         <Link className={styles.item}>Orders</Link>
-                        {user ? (
-                            <Link 
-                                className={styles.logo}
-                                onClick={() => {
-                                    localStorage.removeItem('userToken');
-                                    navigate('/login');
-                                  }}
-                            >
-                                Log Out
-                            </Link>
-                        ) : <Link className={styles.logo} onClick={() => navigate('/login')}> Login  </Link>}
+                        <Space direction="vertical">
+                            <Space wrap>
+
+                                <Dropdown
+                                    menu={{
+                                        items,
+                                    }}
+                                    placement="top"
+                                    arrow
+                                    
+                                >
+                                    <Avatar sx={{ width: 40, height: 40 }} />
+                                </Dropdown>
+                            </Space>
+                        </Space>
                         
                     </Box>
                 </Box>
@@ -93,7 +121,7 @@ export default function HeaderJobDetail() {
                                 >
                                     {dataItem.tenLoaiCongViec}
                                     <Box className={styles.dropdowncontent}>
-                                        <Dropdown 
+                                        <Dropdowns 
                                         onSendData={(jobId:number) => handleJobIdFromDropdown(jobId)} 
                                         renderDropdown={selectedJobId} 
                                         />

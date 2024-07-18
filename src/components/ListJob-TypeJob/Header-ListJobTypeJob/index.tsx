@@ -1,4 +1,4 @@
-import { Box, Button, Container, Input, Link } from '@mui/material';
+import { Avatar,Box, Button, Container, Input, Link } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './Header-Userdetail.module.scss';
 import { useState } from 'react';
@@ -7,7 +7,7 @@ import Jobdetail from '../../ListJob/Jobdetail/ListJobdetail';
 import CourseClassificationCarousel from '../CourseClassification-carosel';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '~/store/user-store';
-
+import { Dropdown, Space } from 'antd'
 
 
 export default function HeaderListJobTypeJob() {
@@ -15,6 +15,31 @@ export default function HeaderListJobTypeJob() {
     const navigate = useNavigate();
     const { data, isLoading, error } = useListJob();
     const user = useUserStore((state) => state.user);
+    const items = [
+        {
+            key: '1',
+            label: (
+                user ? (
+                    <a target="_blank" rel="noopener noreferrer" onClick={() => {
+                        localStorage.removeItem('user');
+                        navigate('/login');
+                    }} >
+                        Log-out
+                    </a>
+                ) : (
+                    <Link className={styles.logo} onClick={() => navigate('/login')}> Login  </Link>
+                )
+            ),
+        },
+        {
+            key: '2',
+            label: (
+                <a target="_blank" rel="noopener noreferrer" onClick={() => navigate('/user-detail')}>
+                    Setting
+                </a>
+            ),
+        },
+    ];
     if (isLoading) {
         return <div>Loading data...</div>
     }
@@ -32,7 +57,7 @@ console.log('object',selectedJobId)
             <Container>
                 <Box className={styles.headerAbove}>
                     <Box className={styles.left}>
-                        <Box className={styles.logo}>
+                        <Box className={styles.logo} onClick={() => navigate('/')} >
                             <span>
                                 <svg width={91} height={27} viewBox="0 0 91 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g fill="#000000">
@@ -56,17 +81,21 @@ console.log('object',selectedJobId)
                         <Link className={styles.item}>Messages</Link>
                         <Link className={styles.item}>Lists</Link>
                         <Link className={styles.item}>Orders</Link>
-                        {user ? (
-                            <Link 
-                                className={styles.logo}
-                                onClick={() => {
-                                    localStorage.removeItem('userToken');
-                                    navigate('/login');
-                                  }}
-                            >
-                                Log Out
-                            </Link>
-                        ) : <Link className={styles.logo} onClick={() => navigate('/login')}> Login  </Link>}
+                        <Space direction="vertical">
+                            <Space wrap>
+
+                                <Dropdown
+                                    menu={{
+                                        items,
+                                    }}
+                                    placement="top"
+                                    arrow
+                                    
+                                >
+                                    <Avatar sx={{ width: 40, height: 40 }} />
+                                </Dropdown>
+                            </Space>
+                        </Space>
                     </Box>
                 </Box>
             </Container>

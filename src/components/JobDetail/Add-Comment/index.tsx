@@ -48,7 +48,7 @@ const year = currentDate.getFullYear(); // Lấy năm hiện tại (4 chữ số
                     />
                 </Box>
                 <Box display='flex'>
-                    {user?.avatar}
+                    <img src={user?.avatar} style={{width: "30px", height: "30px", borderRadius: "50%", marginRight: "2vh"}}/>
                     <textarea id="comment" name="comment" placeholder="Nhập bình luận của bạn..." style={{ width: '70%' }}></textarea>
                 </Box>
                 <Button onClick={handleComment} style={{ width: '15vw', margin: '2vh 0 0 2vh' }} variant="contained">Add Comment</Button>

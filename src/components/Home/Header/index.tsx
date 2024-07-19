@@ -70,9 +70,9 @@ export default function Header() {
             </Box>
             <Box>
               <Box className={styles.navBarRight}>
-              <Button onClick={() => navigate('/job-detail')}>Job Detail</Button>
+              {/* <Button onClick={() => navigate('/job-detail')}>Job Detail</Button>
               <Button onClick={() => navigate('/list-job')}>List Job</Button>
-              <Button onClick={() => navigate('/list-job-&-type-job')}>List Job & Type Job</Button>
+              <Button onClick={() => navigate('/list-job-&-type-job')}>List Job & Type Job</Button> */}
               <Button onClick={() => navigate('/user-detail')}>{user?.name}</Button>
                 {!user && (
                   <>
@@ -84,8 +84,16 @@ export default function Header() {
                     </Button>
                   </>
                 )}
-
                 {user && (
+                  <Button variant='outlined' 
+                  onClick={() => {
+                    localStorage.removeItem('user');
+                    navigate('/login');
+                  }} 
+                  >Log Out</Button>
+                )}
+
+                {/* {user && (
                   <Space direction="vertical">
                   <Space wrap>
 
@@ -101,7 +109,7 @@ export default function Header() {
                       </Dropdown>
                   </Space>
               </Space>
-                )}
+                )} */}
               </Box>
             </Box>
           </Box>

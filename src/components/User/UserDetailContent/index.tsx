@@ -5,14 +5,18 @@ import { Button } from '@mui/base/Button';
 import { useUserStore } from "~/store/user-store";
 import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState } from "react";
 import { useUpdateUser } from "~/hooks/user-hook";
-import { useGetHiredJobs } from "~/hooks/job-hook";
+import { useDeleteHiredJob, useGetHiredJobs } from "~/hooks/job-hook";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 export default function UserDetail() {
+    const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(false);
     const [newName, setNewName] = useState('');
     const user = useUserStore((state) => state.user);
-    const { data: hiredJobs, isLoading, error } = useGetHiredJobs();
+    const { data: hiredJobs, isLoading, error, refetch} = useGetHiredJobs();
+    console.log(hiredJobs)
     const setUser = useUserStore((state) => state.setUser); const updateUserMutation = useUpdateUser(
         () => {
             // On success
@@ -52,6 +56,42 @@ export default function UserDetail() {
             setNewName(user?.name || '');
             setIsEditing(true);
         }
+    };
+
+    const { mutate: deleteHiredJob} = useDeleteHiredJob(
+        () => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Hired job deleted successfully',
+            });
+            refetch();
+        },
+        (error) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed',
+                text: error.message || 'An error occurred while deleting the hired job',
+            });
+        }
+    );
+
+    const handleDeleteHiredJob = (jobId: any | null | undefined) => {
+        if (jobId === null || jobId === undefined) return;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteHiredJob(jobId);
+            }
+        });
     };
 
     return (
@@ -188,7 +228,9 @@ export default function UserDetail() {
                                 ) : error ? (
                                     <p>Error loading hired jobs: {error.message}</p>
                                 ) : hiredJobs && hiredJobs.length > 0 ? (
-                                    hiredJobs.map((job: { id: Key | null | undefined; congViec: { hinhAnh: any; tenCongViec: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined; moTa: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; }) => (
+                                    hiredJobs.map((job: { id: Key | null | undefined; congViec: {
+                                        id: any; hinhAnh: any; tenCongViec: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined; moTa: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; 
+}; }) => (
                                         <Box key={job.id} className={styles.borderTop}>
                                             <Box className={styles.hiredLeft}>
                                                 <img src={job.congViec.hinhAnh || "./src/assets/crs6.png"} alt={job.congViec.tenCongViec?.toString() || ''} />
@@ -197,9 +239,10 @@ export default function UserDetail() {
                                                 <Box className={styles.title}>{job.congViec.tenCongViec}</Box>
                                                 <Box className={styles.text}>{job.congViec.moTa}</Box>
                                                 <Box className={styles.buttons}>
-                                                    <Button className={styles.buttonDetail}>View detail</Button>
-                                                    <Button className={styles.button}>Edit</Button>
-                                                    <Button className={styles.button}>X</Button>
+                                                    <Button onClick={() => navigate(`/job-detail/${job.congViec.id}`)} className={styles.buttonDetail}>View detail</Button>
+                                                    <Button className={styles.button} onClick={() => handleDeleteHiredJob(job.id)}>
+                                                        X
+                                                    </Button>
                                                 </Box>
                                             </Box>
                                         </Box>

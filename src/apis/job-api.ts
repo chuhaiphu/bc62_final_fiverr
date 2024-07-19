@@ -77,3 +77,12 @@ export const getHiredJobsApi = async () => {
     throw error.response.data;
   }
 }
+
+export const deleteHiredJobApi = async (id: any) => {
+  try {
+    const response = await api.delete(`/thue-cong-viec/${id}`);
+    return response.data.content;
+  } catch (error: any) {
+    throw error.response.data;
+  }
+};

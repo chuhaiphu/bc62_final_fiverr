@@ -64,7 +64,7 @@ export default function HeaderJobDetail() {
     return (
         <>
             <Container>
-                <Box className={styles.headerAbove}>
+                <Box className={styles.headerAbove} onClick={() => navigate('/')}>
                     <Box className={styles.left}>
                         <Box className={styles.logo}>
                             <span>

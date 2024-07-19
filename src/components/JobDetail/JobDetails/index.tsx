@@ -11,8 +11,9 @@ import { useParams } from "react-router-dom";
 export default function JobDetails({ props }: any) {
 
   const { id } = useParams()
+  console.log(id)
   const { data, isLoading, error } = usejobdetail(props > 0 ? props : id)
-
+  console.log(data)
   if (isLoading) {
     return <div>Loading data...</div> 
   }

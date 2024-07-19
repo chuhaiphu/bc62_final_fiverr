@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { addJobApi, addServiceApi, deleteJobApi, getAllJobTypesApi, getAllJobsApi, getAllServicesApi, getHiredJobsApi, updateJobApi } from "~/apis/job-api"
+import { addJobApi, addServiceApi, deleteHiredJobApi, deleteJobApi, getAllJobTypesApi, getAllJobsApi, getAllServicesApi, getHiredJobsApi, updateJobApi } from "~/apis/job-api"
 
 export const useGetAllJobs = () => {
   return useQuery({
@@ -53,6 +53,15 @@ export const useGetHiredJobs = () => {
     queryFn: getHiredJobsApi
   })
 }
+
+export const useDeleteHiredJob = (onSuccess?: () => void, onError?: (error: Error) => void) => {
+  return useMutation({
+    mutationFn: deleteHiredJobApi,
+    onSuccess: onSuccess,
+    onError: onError
+  });
+};
+
 
 export const useDeleteJob = (onSuccess?: () => void, onError?: (error: Error) => void) => {
   return useMutation({
